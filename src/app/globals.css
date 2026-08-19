@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-primary-navy: #0f233a;
+    --color-navy-dark: #091726;
+    --color-navy-muted: #4b637d;
+    --color-ca-green: #3d7826;
+    --color-ca-green-hover: #32641e;
+    --color-ca-green-light: #edf7e8;
+    --color-ca-green-border: #cbe6bf;
+    --color-cream-bg: #f8fafc;
+    --color-card-border: #e2e8f0;
+  }
+}
+
+@theme {
+  --color-primary-navy: #0f233a;
+  --color-navy-dark: #091726;
+  --color-navy-muted: #4b637d;
+  --color-ca-green: #3d7826;
+  --color-ca-green-hover: #32641e;
+  --color-ca-green-light: #edf7e8;
+  --color-ca-green-border: #cbe6bf;
+  --color-cream-bg: #f8fafc;
+}
+
+body {
+  color: #1e293b;
+  background-color: #ffffff;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-playfair, .font-serif-title {
+  font-family: var(--font-playfair), Georgia, "Times New Roman", serif;
+}
+
+/* Form Controls and UI refinements */
+input, select, textarea {
+  font-family: var(--font-inter), sans-serif;
+}
+
+button {
+  font-family: var(--font-inter), sans-serif;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
