@@ -13,21 +13,31 @@ export async function POST(request: Request) {
 
     const recipientEmail = 'aftabnew77@gmail.com';
     const timestamp = new Date().toISOString();
+    const subject = `CA Legal Source Contact Inquiry: ${data.topic || 'General'} - ${data.name}`;
 
-    const contactPayload = {
-      targetNotificationEmail: recipientEmail,
-      timestamp,
-      sender: {
-        name: data.name,
-        email: data.email,
-        phone: data.phone || 'Not provided',
-        topic: data.topic || 'General Inquiry',
-      },
-      message: data.message,
-      operator: 'DPA Attorneys at Law (San Diego Office)',
-    };
-
-    console.log(`[CONTACT INQUIRY FOR ${recipientEmail}]:`, JSON.stringify(contactPayload, null, 2));
+    // Direct Email Dispatch via FormSubmit
+    try {
+      await fetch(`https://formsubmit.co/ajax/${recipientEmail}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: subject,
+          _template: 'table',
+          'Sender Name': data.name,
+          'Email Address': data.email,
+          'Phone Number': data.phone || 'N/A',
+          'Topic': data.topic || 'General Inquiry',
+          'Message': data.message,
+          'Timestamp': timestamp,
+          'Operated By': 'DPA Attorneys at Law (San Diego Office - 8880 Rio San Diego Dr. Suite 800, San Diego, CA 92108)'
+        }),
+      });
+    } catch (dispatchErr) {
+      console.error('Contact email dispatch error:', dispatchErr);
+    }
 
     if (process.env.RESEND_API_KEY) {
       try {
@@ -40,7 +50,7 @@ export async function POST(request: Request) {
           body: JSON.stringify({
             from: 'CA Legal Source <notifications@calegalsource.com>',
             to: recipientEmail,
-            subject: `Contact Inquiry: ${data.topic || 'General'} - ${data.name}`,
+            subject: subject,
             html: `
               <h2>New Contact Form Inquiry</h2>
               <p><strong>Name:</strong> ${data.name}</p>

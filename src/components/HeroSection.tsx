@@ -11,7 +11,8 @@ import {
   ArrowRight, 
   ArrowLeft,
   Check,
-  AlertCircle
+  AlertCircle,
+  Loader2
 } from 'lucide-react';
 import { all17PracticeAreas } from '@/data/practiceAreas';
 import { californiaCounties } from '@/data/counties';
@@ -41,8 +42,10 @@ export default function HeroSection() {
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
-  const handleNext = () => {
+  const handleNext = async () => {
     const newErrors: { [key: string]: string } = {};
 
     if (step === 1) {
@@ -72,7 +75,51 @@ export default function HeroSection() {
     if (step < 4) {
       setStep(step + 1);
     } else {
-      setSubmitted(true);
+      // Step 4: Actual HTTP Submission to API & Email Dispatch
+      setIsSubmitting(true);
+      setSubmitError('');
+
+      try {
+        const res = await fetch('/api/intake', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (!res.ok) {
+          throw new Error('Failed to submit intake. Please try again.');
+        }
+
+        setSubmitted(true);
+      } catch (err: any) {
+        console.error('Submission error:', err);
+        // Direct client fallback to FormSubmit to ensure email always arrives at aftabnew77@gmail.com
+        try {
+          await fetch('https://formsubmit.co/ajax/aftabnew77@gmail.com', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              _subject: `New CA Legal Intake: ${formData.practiceArea} (${formData.county}) - ${formData.firstName} ${formData.lastName}`,
+              'Client Name': `${formData.firstName} ${formData.lastName}`,
+              'Phone': formData.phone,
+              'Email': formData.email,
+              'Legal Category': formData.practiceArea,
+              'County': formData.county,
+              'Incident Date': formData.incidentDate || 'Not specified',
+              'Case Details': formData.description,
+              'Preferred Language': formData.preferredLanguage,
+              'Operated By': 'DPA Attorneys at Law (San Diego Office)'
+            })
+          });
+          setSubmitted(true);
+        } catch (fallbackErr) {
+          setSubmitError(language === 'es' ? 'Hubo un problema al enviar. Por favor llame al (760) 372-0007.' : 'There was an issue submitting. Please call (760) 372-0007.');
+        }
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -215,6 +262,13 @@ export default function HeroSection() {
 
               {/* Form Body */}
               <div className="mt-4 space-y-3.5">
+                {submitError && (
+                  <div className="p-3 bg-red-50 text-red-700 rounded-lg text-xs flex items-center gap-2 border border-red-200">
+                    <AlertCircle className="w-4 h-4 shrink-0" />
+                    <span>{submitError}</span>
+                  </div>
+                )}
+
                 {submitted ? (
                   <div className="text-center py-6 space-y-3">
                     <div className="w-12 h-12 bg-[#edf7e8] text-[#3d7826] rounded-full flex items-center justify-center mx-auto shadow-sm">
@@ -229,7 +283,7 @@ export default function HeroSection() {
                     <div className="p-3 bg-gray-50 rounded-xl text-xs text-gray-500 text-left space-y-1">
                       <p><strong>{t.step4.category}</strong> {formData.practiceArea || 'General Legal'}</p>
                       <p><strong>{t.step4.county}</strong> {formData.county || 'California'}</p>
-                      <p><strong>Status:</strong> {language === 'es' ? 'En Revisión' : 'Under Review'}</p>
+                      <p><strong>Status:</strong> {language === 'es' ? 'Enviado a revisión' : 'Sent for Review'}</p>
                     </div>
                     <button
                       onClick={() => {
@@ -476,8 +530,9 @@ export default function HeroSection() {
                       {step > 1 && (
                         <button
                           type="button"
+                          disabled={isSubmitting}
                           onClick={handleBack}
-                          className="px-3.5 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-semibold text-xs sm:text-sm transition-colors cursor-pointer"
+                          className="px-3.5 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-semibold text-xs sm:text-sm transition-colors cursor-pointer disabled:opacity-50"
                         >
                           <ArrowLeft className="w-4 h-4" />
                         </button>
@@ -485,11 +540,21 @@ export default function HeroSection() {
 
                       <button
                         type="button"
+                        disabled={isSubmitting}
                         onClick={handleNext}
-                        className="flex-1 bg-[#3d7826] hover:bg-[#32641e] text-white font-semibold py-3 px-5 rounded-lg text-sm sm:text-base flex items-center justify-center gap-2 shadow-sm transition-all duration-150 active:scale-[0.99] cursor-pointer"
+                        className="flex-1 bg-[#3d7826] hover:bg-[#32641e] text-white font-semibold py-3 px-5 rounded-lg text-sm sm:text-base flex items-center justify-center gap-2 shadow-sm transition-all duration-150 active:scale-[0.99] cursor-pointer disabled:opacity-75"
                       >
-                        <span>{step === 4 ? t.submit : t.continue}</span>
-                        <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                            <span>{language === 'es' ? 'Enviando...' : 'Submitting...'}</span>
+                          </>
+                        ) : (
+                          <>
+                            <span>{step === 4 ? t.submit : t.continue}</span>
+                            <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                          </>
+                        )}
                       </button>
                     </div>
 

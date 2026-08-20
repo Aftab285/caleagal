@@ -15,32 +15,38 @@ export async function POST(request: Request) {
     const recipientEmail = 'aftabnew77@gmail.com';
     const timestamp = new Date().toISOString();
 
-    const submissionPayload = {
-      targetNotificationEmail: recipientEmail,
-      timestamp,
-      clientDetails: {
-        name: `${data.firstName} ${data.lastName}`,
-        email: data.email,
-        phone: data.phone,
-        preferredLanguage: data.preferredLanguage || 'English',
-      },
-      caseDetails: {
-        practiceArea: data.practiceArea,
-        county: data.county,
-        description: data.description || 'No description provided',
-        incidentDate: data.incidentDate || 'Not specified',
-      },
-      compliance: {
-        termsConsent: Boolean(data.consent),
-        operator: 'DPA Attorneys at Law (San Diego Office)',
-        jurisdiction: 'California',
-      }
-    };
+    const fullName = `${data.firstName} ${data.lastName}`;
+    const subject = `New CA Legal Source Intake: ${data.practiceArea} (${data.county}) - ${fullName}`;
 
-    // Log the submission payload for auditing and server notification
-    console.log(`[INTAKE SUBMISSION FOR ${recipientEmail}]:`, JSON.stringify(submissionPayload, null, 2));
+    // Direct Email Dispatch via FormSubmit & Web3Forms
+    try {
+      await fetch(`https://formsubmit.co/ajax/${recipientEmail}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: subject,
+          _template: 'table',
+          'Client Name': fullName,
+          'Phone': data.phone,
+          'Email': data.email,
+          'Legal Practice Area': data.practiceArea,
+          'California County': data.county,
+          'Incident Date / Timeline': data.incidentDate || 'Not specified',
+          'Case Details': data.description || 'N/A',
+          'Preferred Language': data.preferredLanguage || 'English',
+          'Consent Granted': data.consent ? 'Yes' : 'No',
+          'Submission Timestamp': timestamp,
+          'Operated By': 'DPA Attorneys at Law (San Diego Office - 8880 Rio San Diego Dr. Suite 800, San Diego, CA 92108)'
+        }),
+      });
+    } catch (dispatchErr) {
+      console.error('Email dispatch error via FormSubmit:', dispatchErr);
+    }
 
-    // Optional: If an SMTP or Resend API key is configured in env, send email notification
+    // Optional Resend API fallback if configured in env
     if (process.env.RESEND_API_KEY) {
       try {
         await fetch('https://api.resend.com/emails', {
@@ -52,14 +58,15 @@ export async function POST(request: Request) {
           body: JSON.stringify({
             from: 'CA Legal Source <notifications@calegalsource.com>',
             to: recipientEmail,
-            subject: `New CA Legal Intake: ${data.practiceArea} (${data.county})`,
+            subject: subject,
             html: `
               <h2>New California Legal Intake Request</h2>
-              <p><strong>Name:</strong> ${data.firstName} ${data.lastName}</p>
+              <p><strong>Name:</strong> ${fullName}</p>
               <p><strong>Phone:</strong> ${data.phone}</p>
               <p><strong>Email:</strong> ${data.email}</p>
               <p><strong>Legal Category:</strong> ${data.practiceArea}</p>
               <p><strong>County:</strong> ${data.county}</p>
+              <p><strong>Incident Date:</strong> ${data.incidentDate || 'Not specified'}</p>
               <p><strong>Description:</strong> ${data.description}</p>
               <p><strong>Preferred Language:</strong> ${data.preferredLanguage}</p>
               <hr />
@@ -68,14 +75,14 @@ export async function POST(request: Request) {
           }),
         });
       } catch (emailErr) {
-        console.error('Email dispatch error:', emailErr);
+        console.error('Resend dispatch error:', emailErr);
       }
     }
 
     return NextResponse.json(
       { 
         success: true, 
-        message: 'Intake submitted successfully and routed to intake team.',
+        message: 'Intake submitted successfully and notification sent.',
         routedTo: recipientEmail,
         timestamp 
       },
