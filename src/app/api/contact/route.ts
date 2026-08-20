@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { sendNotificationEmail } from '@/lib/mailer';
 
 export async function POST(request: Request) {
   try {
@@ -12,69 +13,53 @@ export async function POST(request: Request) {
     }
 
     const recipientEmail = 'aftabnew77@gmail.com';
-    const timestamp = new Date().toISOString();
+    const timestamp = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
     const subject = `CA Legal Source Contact Inquiry: ${data.topic || 'General'} - ${data.name}`;
 
-    // Direct Email Dispatch via FormSubmit
-    try {
-      await fetch(`https://formsubmit.co/ajax/${recipientEmail}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          _subject: subject,
-          _template: 'table',
-          'Sender Name': data.name,
-          'Email Address': data.email,
-          'Phone Number': data.phone || 'N/A',
-          'Topic': data.topic || 'General Inquiry',
-          'Message': data.message,
-          'Timestamp': timestamp,
-          'Operated By': 'DPA Attorneys at Law (San Diego Office - 8880 Rio San Diego Dr. Suite 800, San Diego, CA 92108)'
-        }),
-      });
-    } catch (dispatchErr) {
-      console.error('Contact email dispatch error:', dispatchErr);
-    }
+    const htmlContent = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
+        <div style="background-color: #0f233a; color: #ffffff; padding: 20px; text-align: center;">
+          <h2 style="margin: 0; font-size: 22px;">CA Legal Source — Contact Inquiry</h2>
+        </div>
+        <div style="padding: 24px; background-color: #ffffff; color: #1e293b; line-height: 1.6;">
+          <table style="width: 100%; font-size: 14px; margin-bottom: 20px;">
+            <tr><td style="width: 140px; color: #64748b;"><strong>Name:</strong></td><td>${data.name}</td></tr>
+            <tr><td style="color: #64748b;"><strong>Email:</strong></td><td><a href="mailto:${data.email}">${data.email}</a></td></tr>
+            <tr><td style="color: #64748b;"><strong>Phone:</strong></td><td>${data.phone || 'Not provided'}</td></tr>
+            <tr><td style="color: #64748b;"><strong>Topic:</strong></td><td><strong>${data.topic || 'General Inquiry'}</strong></td></tr>
+          </table>
 
-    if (process.env.RESEND_API_KEY) {
-      try {
-        await fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            from: 'CA Legal Source <notifications@calegalsource.com>',
-            to: recipientEmail,
-            subject: subject,
-            html: `
-              <h2>New Contact Form Inquiry</h2>
-              <p><strong>Name:</strong> ${data.name}</p>
-              <p><strong>Email:</strong> ${data.email}</p>
-              <p><strong>Phone:</strong> ${data.phone || 'N/A'}</p>
-              <p><strong>Topic:</strong> ${data.topic || 'General'}</p>
-              <p><strong>Message:</strong></p>
-              <p>${data.message}</p>
-              <hr />
-              <p><small>Operated by DPA Attorneys at Law • 8880 Rio San Diego Dr. Suite 800, San Diego, CA 92108</small></p>
-            `,
-          }),
-        });
-      } catch (emailErr) {
-        console.error('Email dispatch error:', emailErr);
-      }
-    }
+          <h3 style="color: #0f233a; border-bottom: 2px solid #edf2f7; padding-bottom: 8px;">Message Content</h3>
+          <div style="background-color: #f8fafc; padding: 14px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 14px; white-space: pre-wrap;">${data.message}</div>
+        </div>
+        <div style="background-color: #f1f5f9; padding: 14px 20px; font-size: 11px; color: #64748b; text-align: center; border-top: 1px solid #e2e8f0;">
+          Received: ${timestamp} (PT) • Operated by DPA Attorneys at Law (San Diego Office)
+        </div>
+      </div>
+    `;
+
+    const { emailSent, logs } = await sendNotificationEmail({
+      subject,
+      htmlContent,
+      dataFields: {
+        'Sender Name': data.name,
+        'Email': data.email,
+        'Phone': data.phone || 'N/A',
+        'Topic': data.topic || 'General Inquiry',
+        'Message': data.message,
+        'Timestamp': timestamp,
+      },
+    });
+
+    console.log(`[CONTACT PROCESSED FOR ${recipientEmail}]:`, logs);
 
     return NextResponse.json(
       { 
         success: true, 
-        message: 'Your inquiry has been received. Our team will get back to you shortly.',
+        message: 'Your inquiry has been received and routed.',
         routedTo: recipientEmail,
-        timestamp 
+        timestamp,
+        deliveryLogs: logs,
       },
       { status: 200 }
     );
