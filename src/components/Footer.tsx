@@ -25,7 +25,7 @@ export default function Footer() {
                 alt="CA Legal Source"
                 width={360}
                 height={110}
-                className="h-20 sm:h-24 md:h-28 w-auto object-contain opacity-95 group-hover:opacity-100 transition-opacity"
+                className="h-16 sm:h-20 md:h-24 w-auto object-contain opacity-95 group-hover:opacity-100 transition-opacity"
               />
             </Link>
 
@@ -117,7 +117,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Mandatory Statutory Compliance Disclaimer */}
+      {/* Mandatory Statutory Compliance Disclaimer & Credits */}
       <div className="bg-[#071322] py-8 border-t border-[#12263f]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-4 text-center">
           <div className="flex items-center justify-center gap-2 text-gray-400 text-xs font-semibold">
@@ -133,9 +133,23 @@ export default function Footer() {
             {t.referralNotice}
           </p>
 
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-gray-500 text-[11px] border-t border-[#12263f]">
+          <div className="pt-3 flex flex-col sm:flex-row items-center justify-between gap-3 text-gray-400 text-[11px] border-t border-[#12263f]">
             <p>© {new Date().getFullYear()} CA Legal Source • {t.operatedBy}. {t.rightsReserved}</p>
-            <div className="flex items-center gap-4">
+            
+            {/* Clickable Designer / Developer Credit Link */}
+            <div className="text-gray-400 text-[11px]">
+              Designed and Developed by{' '}
+              <a
+                href="https://www.aiwebsiteservice.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#85db61] hover:text-[#a2ea83] font-semibold hover:underline transition-colors"
+              >
+                AIWEBSITESERVICE
+              </a>
+            </div>
+
+            <div className="flex items-center gap-4 text-gray-400">
               <Link href="/privacy-policy" className="hover:underline">{language === 'es' ? 'Privacidad' : 'Privacy'}</Link>
               <span>•</span>
               <Link href="/terms-of-use" className="hover:underline">{language === 'es' ? 'Términos' : 'Terms'}</Link>
