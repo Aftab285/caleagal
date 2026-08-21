@@ -29,7 +29,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
     ],
-    sitemap: 'https://calegalsource.com/sitemap.xml',
-    host: 'https://calegalsource.com',
+    sitemap: 'https://www.calegalsource.com/sitemap.xml',
+    host: 'https://www.calegalsource.com',
   };
 }

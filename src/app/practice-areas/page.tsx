@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: 'California Practice Areas | Find Legal Help Across 17 Legal Categories | CA Legal Source',
   description: 'Explore all 17 California legal practice areas supported by CA Legal Source, including employment law, personal injury, tenant rights, ADA, and family law.',
   alternates: {
-    canonical: 'https://calegalsource.com/practice-areas',
+    canonical: 'https://www.calegalsource.com/practice-areas',
   },
 };
 

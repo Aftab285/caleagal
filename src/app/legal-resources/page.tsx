@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: 'California Legal Resources & Guides | CA Legal Source',
   description: 'Authoritative, California-specific legal guides on overtime wage laws, tenant habitability rights, mold remedies, accident checklists, and consumer laws.',
   alternates: {
-    canonical: 'https://calegalsource.com/legal-resources',
+    canonical: 'https://www.calegalsource.com/legal-resources',
   },
 };
 

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Accessibility Statement (WCAG 2.1 AA) | CA Legal Source',
   description: 'Our commitment to digital accessibility for individuals with disabilities in accordance with WCAG 2.1 AA and ADA Title III guidelines.',
   alternates: {
-    canonical: 'https://calegalsource.com/accessibility',
+    canonical: 'https://www.calegalsource.com/accessibility',
   },
 };
 

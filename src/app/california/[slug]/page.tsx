@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${county.name} Legal Help & Attorney Referral | CA Legal Source`,
     description: `Find qualified California attorneys in ${county.name} covering ${county.majorCities.slice(0, 4).join(', ')}. Free case review and intake for qualifying matters.`,
     alternates: {
-      canonical: `https://calegalsource.com/california/${county.slug}`,
+      canonical: `https://www.calegalsource.com/california/${county.slug}`,
     },
   };
 }

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Legal Disclaimer | CA Legal Source',
   description: 'Legal disclaimers, California statutory notices, and attorney advertising disclosures for CA Legal Source.',
   alternates: {
-    canonical: 'https://calegalsource.com/disclaimer',
+    canonical: 'https://www.calegalsource.com/disclaimer',
   },
 };
 

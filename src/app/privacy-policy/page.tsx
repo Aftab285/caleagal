@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Privacy Policy & California Privacy Notice (CCPA/CPRA) | CA Legal Source',
   description: 'California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA) privacy notice and data protections for CA Legal Source users.',
   alternates: {
-    canonical: 'https://calegalsource.com/privacy-policy',
+    canonical: 'https://www.calegalsource.com/privacy-policy',
   },
 };
 

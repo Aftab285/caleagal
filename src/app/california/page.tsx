@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: 'California Counties Legal Directory | All 58 Counties | CA Legal Source',
   description: 'Explore legal help and attorney matching services across all 58 California counties, including Los Angeles, San Diego, Orange County, Santa Clara, and Alameda.',
   alternates: {
-    canonical: 'https://calegalsource.com/california',
+    canonical: 'https://www.calegalsource.com/california',
   },
 };
 

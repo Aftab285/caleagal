@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: 'About CA Legal Source — California Legal Assistance Platform',
   description: 'Learn about CA Legal Source, our mission to simplify finding qualified legal counsel across California, and our commitment to transparency and bilingual accessibility.',
   alternates: {
-    canonical: 'https://calegalsource.com/about',
+    canonical: 'https://www.calegalsource.com/about',
   },
 };
 

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: 'How It Works — Transparent Legal Matching Process | CA Legal Source',
   description: 'Understand the step-by-step process of how CA Legal Source evaluates legal inquiries and connects California residents with pre-screened attorneys.',
   alternates: {
-    canonical: 'https://calegalsource.com/how-it-works',
+    canonical: 'https://www.calegalsource.com/how-it-works',
   },
 };
 

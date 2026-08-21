@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: 'For California Attorneys — Join Our Legal Referral Panel | CA Legal Source',
   description: 'Learn about participating on CA Legal Source practice-area panels across California. Review panel eligibility, State Bar requirements, and fair rotation standards.',
   alternates: {
-    canonical: 'https://calegalsource.com/for-attorneys',
+    canonical: 'https://www.calegalsource.com/for-attorneys',
   },
 };
 

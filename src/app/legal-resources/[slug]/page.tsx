@@ -30,12 +30,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${guide.title} | CA Legal Source`,
     description: guide.summary,
     alternates: {
-      canonical: `https://calegalsource.com/legal-resources/${guide.slug}`,
+      canonical: `https://www.calegalsource.com/legal-resources/${guide.slug}`,
     },
     openGraph: {
       title: guide.title,
       description: guide.summary,
-      url: `https://calegalsource.com/legal-resources/${guide.slug}`,
+      url: `https://www.calegalsource.com/legal-resources/${guide.slug}`,
       siteName: 'CA Legal Source',
       type: 'article',
     },

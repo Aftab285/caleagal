@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Terms of Use | CA Legal Source',
   description: 'Terms and conditions governing the use of CA Legal Source legal referral and informational website.',
   alternates: {
-    canonical: 'https://calegalsource.com/terms-of-use',
+    canonical: 'https://www.calegalsource.com/terms-of-use',
   },
 };
 

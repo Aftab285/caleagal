@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: 'Request California Legal Help | Free Case Intake & Attorney Matching',
   description: 'Submit your confidential California legal inquiry to be evaluated for connection with a qualified attorney handling your specific matter in your county.',
   alternates: {
-    canonical: 'https://calegalsource.com/intake',
+    canonical: 'https://www.calegalsource.com/intake',
   },
 };
 

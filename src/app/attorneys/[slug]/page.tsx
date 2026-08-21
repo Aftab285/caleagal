@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${attorney.name} | California Attorney Profile | CA Legal Source`,
     description: `${attorney.name} - ${attorney.title} at ${attorney.firm}. Practice areas: ${attorney.practiceAreas.join(', ')}. Serving ${attorney.countiesServed.join(', ')}.`,
     alternates: {
-      canonical: `https://calegalsource.com/attorneys/${attorney.slug}`,
+      canonical: `https://www.calegalsource.com/attorneys/${attorney.slug}`,
     },
   };
 }

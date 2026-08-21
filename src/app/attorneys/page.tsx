@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: 'California Attorney Directory | Find Pre-Screened California Lawyers | CA Legal Source',
   description: 'Search our directory of verified California attorneys by practice area, county jurisdiction, and language preference.',
   alternates: {
-    canonical: 'https://calegalsource.com/attorneys',
+    canonical: 'https://www.calegalsource.com/attorneys',
   },
 };
 

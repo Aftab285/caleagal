@@ -100,8 +100,8 @@ export default function HeroSection() {
             headers: {
               'Content-Type': 'application/json',
               'Accept': 'application/json',
-              'Origin': 'https://calegalsource.com',
-              'Referer': 'https://calegalsource.com/',
+              'Origin': 'https://www.calegalsource.com',
+              'Referer': 'https://www.calegalsource.com/',
             },
             body: JSON.stringify({
               _subject: `New CA Legal Intake: ${formData.practiceArea} (${formData.county}) - ${formData.firstName} ${formData.lastName}`,

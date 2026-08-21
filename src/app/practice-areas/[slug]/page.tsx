@@ -30,12 +30,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: area.seoTitle,
     description: area.metaDesc,
     alternates: {
-      canonical: `https://calegalsource.com/practice-areas/${area.slug}`,
+      canonical: `https://www.calegalsource.com/practice-areas/${area.slug}`,
     },
     openGraph: {
       title: area.seoTitle,
       description: area.metaDesc,
-      url: `https://calegalsource.com/practice-areas/${area.slug}`,
+      url: `https://www.calegalsource.com/practice-areas/${area.slug}`,
       siteName: 'CA Legal Source',
       type: 'article',
     },
