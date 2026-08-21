@@ -16,18 +16,18 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-white/98 backdrop-blur-md border-b border-gray-200 shadow-2xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-1 sm:py-2 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-1.5 sm:py-2 flex items-center justify-between">
         
-        {/* Brand Logo with slim, compact height on mobile and prominent on desktop */}
+        {/* Brand Logo: Prominently sized on both mobile and desktop */}
         <Link href="/" className="flex items-center group py-0.5">
           <div className="relative flex items-center">
             <Image
               src="/logo.png"
               alt="CA Legal Source"
-              width={340}
-              height={110}
+              width={640}
+              height={426}
               priority
-              className="h-10 sm:h-14 md:h-18 lg:h-22 w-auto object-contain brightness-0 filter contrast-200 group-hover:opacity-90 transition-all duration-200"
+              className="w-[165px] sm:w-[210px] md:w-[250px] lg:w-[290px] h-auto max-h-14 sm:max-h-18 md:max-h-22 lg:max-h-24 object-contain brightness-0 filter contrast-200 group-hover:opacity-90 transition-all duration-200"
             />
           </div>
         </Link>
