@@ -15,10 +15,10 @@ export default function Header() {
   const t = translations[language].header;
 
   return (
-    <header className="sticky top-0 z-50 bg-white/98 backdrop-blur-md border-b border-gray-200 shadow-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-1.5 flex items-center justify-between">
+    <header className="sticky top-0 z-50 bg-white/98 backdrop-blur-md border-b border-gray-200 shadow-2xs">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-1 sm:py-2 flex items-center justify-between">
         
-        {/* Brand Logo with Extra Large, Prominent Size */}
+        {/* Brand Logo with slim, compact height on mobile and prominent on desktop */}
         <Link href="/" className="flex items-center group py-0.5">
           <div className="relative flex items-center">
             <Image
@@ -27,7 +27,7 @@ export default function Header() {
               width={340}
               height={110}
               priority
-              className="h-20 sm:h-24 md:h-26 lg:h-28 w-auto object-contain brightness-0 filter contrast-200 group-hover:opacity-90 transition-all duration-200"
+              className="h-10 sm:h-14 md:h-18 lg:h-22 w-auto object-contain brightness-0 filter contrast-200 group-hover:opacity-90 transition-all duration-200"
             />
           </div>
         </Link>
@@ -120,7 +120,7 @@ export default function Header() {
         <div className="hidden sm:flex items-center">
           <a
             href="tel:7603720007"
-            className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-300 hover:border-[#3d7826] bg-white text-[#0f233a] hover:text-[#3d7826] transition-all duration-200 shadow-xs font-semibold text-sm group"
+            className="flex items-center gap-2 px-5 py-2 rounded-full border border-gray-300 hover:border-[#3d7826] bg-white text-[#0f233a] hover:text-[#3d7826] transition-all duration-200 shadow-xs font-semibold text-sm group"
           >
             <Phone className="w-4 h-4 text-[#3d7826] group-hover:scale-110 transition-transform" />
             <span>(760) 372-0007</span>
@@ -130,7 +130,7 @@ export default function Header() {
         {/* Mobile Hamburger Toggle */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2 text-gray-700 hover:text-[#0f233a]"
+          className="lg:hidden p-1.5 text-gray-700 hover:text-[#0f233a]"
           aria-label="Toggle Navigation Menu"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

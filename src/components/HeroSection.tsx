@@ -75,7 +75,6 @@ export default function HeroSection() {
     if (step < 4) {
       setStep(step + 1);
     } else {
-      // Step 4: Actual HTTP Submission to API & Email Dispatch
       setIsSubmitting(true);
       setSubmitError('');
 
@@ -89,17 +88,21 @@ export default function HeroSection() {
         });
 
         if (!res.ok) {
-          throw new Error('Failed to submit intake. Please try again.');
+          throw new Error('Failed to submit intake.');
         }
 
         setSubmitted(true);
       } catch (err: any) {
         console.error('Submission error:', err);
-        // Direct client fallback to FormSubmit to ensure email always arrives at aftabnew77@gmail.com
         try {
           await fetch('https://formsubmit.co/ajax/aftabnew77@gmail.com', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              'Origin': 'https://calegalsource.com',
+              'Referer': 'https://calegalsource.com/',
+            },
             body: JSON.stringify({
               _subject: `New CA Legal Intake: ${formData.practiceArea} (${formData.county}) - ${formData.firstName} ${formData.lastName}`,
               'Client Name': `${formData.firstName} ${formData.lastName}`,
@@ -131,39 +134,40 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="hero-intake" className="relative overflow-hidden pt-6 pb-12 lg:pt-10 lg:pb-16 border-b border-gray-200 min-h-[620px] flex items-center bg-[#f7f9fa]">
-      {/* Background Image: Vivid California Bay Bridge, Skyline & Palm Tree */}
+    <section id="hero-intake" className="relative overflow-hidden pt-4 pb-10 sm:pt-6 sm:pb-12 lg:pt-10 lg:pb-16 border-b border-gray-200 min-h-[580px] flex items-center bg-[#f8fafc]">
+      {/* Background Image: Vivid California Bay Bridge & Skyline */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/hero-california-bridge.jpg"
           alt="California Bay Bridge and Skyline"
           fill
           priority
-          className="object-cover object-right lg:object-center"
+          className="object-cover object-[85%_center] lg:object-center"
         />
-        {/* Soft, clean overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/60 to-transparent lg:from-white/85 lg:via-white/40 lg:to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/80 to-transparent" />
+        {/* Mobile & Desktop Adaptive Contrast Overlays */}
+        {/* On mobile: smooth high-contrast white overlay so text is 100% sharp and readable over the palm tree backdrop */}
+        <div className="absolute inset-0 bg-white/85 sm:bg-white/70 lg:bg-transparent lg:bg-gradient-to-r lg:from-white/92 lg:via-white/50 lg:to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white/90 to-transparent" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
           
           {/* LEFT COLUMN: Hero Copy & Trust Badges */}
-          <div className="lg:col-span-7 space-y-5">
+          <div className="lg:col-span-7 space-y-4 sm:space-y-5">
             {/* Pill Tag */}
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/90 backdrop-blur-md border border-[#cde8c5] text-[#3d7826] text-[11px] font-bold tracking-wider uppercase shadow-xs">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md border border-[#cde8c5] text-[#3d7826] text-[11px] font-bold tracking-wider uppercase shadow-xs">
               {t.badge}
             </div>
 
             {/* Main Headline with Playfair Display */}
-            <h1 className="font-playfair text-4xl sm:text-5xl lg:text-[52px] font-bold text-[#0f233a] leading-[1.12] tracking-tight drop-shadow-xs">
+            <h1 className="font-playfair text-3xl sm:text-4xl lg:text-[52px] font-bold text-[#0f233a] leading-[1.14] sm:leading-[1.12] tracking-tight drop-shadow-xs">
               {t.headlinePart1} <br />
               <span className="text-[#0f233a]">{t.headlinePart2}</span>
             </h1>
 
             {/* Subheading with Inter */}
-            <p className="text-gray-800 text-base sm:text-lg leading-relaxed max-w-2xl font-medium drop-shadow-xs">
+            <p className="text-gray-800 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl font-medium drop-shadow-xs">
               {t.subheading}
             </p>
 
@@ -183,8 +187,8 @@ export default function HeroSection() {
             </div>
 
             {/* 4 Trust Badges in Row */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 pt-3.5 border-t border-gray-400/50">
-              <div className="flex items-center gap-2 bg-white/85 backdrop-blur-xs p-2 rounded-lg border border-gray-200 shadow-2xs">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3.5 pt-2 sm:pt-3.5 border-t border-gray-400/40">
+              <div className="flex items-center gap-2 bg-white/90 backdrop-blur-xs p-2 rounded-lg border border-gray-200 shadow-2xs">
                 <div className="w-7 h-7 rounded-full bg-[#edf7e8] flex items-center justify-center shrink-0 text-[#3d7826]">
                   <ShieldCheck className="w-4 h-4" />
                 </div>
@@ -193,7 +197,7 @@ export default function HeroSection() {
                 </span>
               </div>
 
-              <div className="flex items-center gap-2 bg-white/85 backdrop-blur-xs p-2 rounded-lg border border-gray-200 shadow-2xs">
+              <div className="flex items-center gap-2 bg-white/90 backdrop-blur-xs p-2 rounded-lg border border-gray-200 shadow-2xs">
                 <div className="w-7 h-7 rounded-full bg-[#edf7e8] flex items-center justify-center shrink-0 text-[#3d7826]">
                   <Users className="w-4 h-4" />
                 </div>
@@ -202,7 +206,7 @@ export default function HeroSection() {
                 </span>
               </div>
 
-              <div className="flex items-center gap-2 bg-white/85 backdrop-blur-xs p-2 rounded-lg border border-gray-200 shadow-2xs">
+              <div className="flex items-center gap-2 bg-white/90 backdrop-blur-xs p-2 rounded-lg border border-gray-200 shadow-2xs">
                 <div className="w-7 h-7 rounded-full bg-[#edf7e8] flex items-center justify-center shrink-0 text-[#3d7826]">
                   <Lock className="w-4 h-4" />
                 </div>
@@ -211,7 +215,7 @@ export default function HeroSection() {
                 </span>
               </div>
 
-              <div className="flex items-center gap-2 bg-white/85 backdrop-blur-xs p-2 rounded-lg border border-gray-200 shadow-2xs">
+              <div className="flex items-center gap-2 bg-white/90 backdrop-blur-xs p-2 rounded-lg border border-gray-200 shadow-2xs">
                 <div className="w-7 h-7 rounded-full bg-[#edf7e8] flex items-center justify-center shrink-0 text-[#3d7826]">
                   <Sparkles className="w-4 h-4" />
                 </div>
@@ -228,7 +232,7 @@ export default function HeroSection() {
               
               {/* Card Header */}
               <div className="text-center pb-4 border-b border-gray-100">
-                <h2 className="font-playfair text-[22px] sm:text-2xl font-bold text-[#0f233a]">
+                <h2 className="font-playfair text-[20px] sm:text-[22px] lg:text-2xl font-bold text-[#0f233a]">
                   {t.intakeTitle}
                 </h2>
                 <p className="text-xs sm:text-sm font-semibold text-[#3d7826] mt-0.5">
