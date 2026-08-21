@@ -87,39 +87,16 @@ export default function HeroSection() {
           body: JSON.stringify(formData),
         });
 
+        const data = await res.json().catch(() => ({}));
+
         if (!res.ok) {
-          throw new Error('Failed to submit intake.');
+          throw new Error(data.error || (language === 'es' ? 'Hubo un error al enviar el formulario. Por favor intente de nuevo.' : 'Failed to submit form. Please try again.'));
         }
 
         setSubmitted(true);
       } catch (err: any) {
-        console.error('Submission error:', err);
-        try {
-          await fetch('https://formsubmit.co/ajax/aftabnew77@gmail.com', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-              'Origin': 'https://www.calegalsource.com',
-              'Referer': 'https://www.calegalsource.com/',
-            },
-            body: JSON.stringify({
-              _subject: `New CA Legal Intake: ${formData.practiceArea} (${formData.county}) - ${formData.firstName} ${formData.lastName}`,
-              'Client Name': `${formData.firstName} ${formData.lastName}`,
-              'Phone': formData.phone,
-              'Email': formData.email,
-              'Legal Category': formData.practiceArea,
-              'County': formData.county,
-              'Incident Date': formData.incidentDate || 'Not specified',
-              'Case Details': formData.description,
-              'Preferred Language': formData.preferredLanguage,
-              'Operated By': 'DPA Attorneys at Law (San Diego Office)'
-            })
-          });
-          setSubmitted(true);
-        } catch (fallbackErr) {
-          setSubmitError(language === 'es' ? 'Hubo un problema al enviar. Por favor llame al (760) 372-0007.' : 'There was an issue submitting. Please call (760) 372-0007.');
-        }
+        console.error('Intake submission error:', err);
+        setSubmitError(err.message || (language === 'es' ? 'Hubo un problema al enviar. Por favor llame al (760) 372-0007.' : 'There was an issue submitting. Please call (760) 372-0007.'));
       } finally {
         setIsSubmitting(false);
       }
