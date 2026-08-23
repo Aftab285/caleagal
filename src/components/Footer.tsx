@@ -19,7 +19,7 @@ export default function Footer() {
           
           {/* Column 1: Brand, Operator & Contact Info */}
           <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="inline-block group py-1">
+            <Link href="/" aria-label="CA Legal Source Home" className="inline-block group py-1">
               <Image
                 src="/logo.png"
                 alt="CA Legal Source"
@@ -47,11 +47,11 @@ export default function Footer() {
             </div>
 
             <div className="pt-1 space-y-2 text-xs text-gray-400">
-              <a href="tel:7603720007" className="flex items-center gap-2 hover:text-white transition-colors">
+              <a href="tel:7603720007" aria-label="Call CA Legal Source phone (760) 372-0007" className="flex items-center gap-2 hover:text-white transition-colors">
                 <Phone className="w-3.5 h-3.5 text-[#52a632]" />
                 <span className="text-gray-200 font-medium">(760) 372-0007</span>
               </a>
-              <a href="mailto:questions@dpalaw.com" className="flex items-center gap-2 hover:text-white transition-colors">
+              <a href="mailto:questions@dpalaw.com" aria-label="Email DPA Attorneys at Law" className="flex items-center gap-2 hover:text-white transition-colors">
                 <Mail className="w-3.5 h-3.5 text-[#52a632]" />
                 <span>questions@dpalaw.com</span>
               </a>
@@ -64,9 +64,9 @@ export default function Footer() {
 
           {/* Column 2: Legal Practice Areas */}
           <div className="space-y-3">
-            <h4 className="font-playfair font-bold text-sm text-white tracking-wide">
+            <p className="font-playfair font-bold text-sm text-white tracking-wide">
               {t.findHelp}
-            </h4>
+            </p>
             <ul className="space-y-2 text-xs text-gray-400">
               <li><Link href="/practice-areas/employment" className="hover:text-white transition-colors">{language === 'es' ? 'Derecho Laboral' : 'Employment Law'}</Link></li>
               <li><Link href="/practice-areas/personal-injury" className="hover:text-white transition-colors">{language === 'es' ? 'Lesiones Personales' : 'Personal Injury'}</Link></li>
@@ -75,15 +75,15 @@ export default function Footer() {
               <li><Link href="/practice-areas/consumer-protection" className="hover:text-white transition-colors">{language === 'es' ? 'Protección al Consumidor' : 'Consumer Protection'}</Link></li>
               <li><Link href="/practice-areas/family-law" className="hover:text-white transition-colors">{language === 'es' ? 'Derecho Familiar' : 'Family Law & Custody'}</Link></li>
               <li><Link href="/practice-areas/immigration" className="hover:text-white transition-colors">{language === 'es' ? 'Inmigración en California' : 'California Immigration'}</Link></li>
-              <li><Link href="/practice-areas" className="text-[#52a632] hover:underline font-semibold">{t.viewAll17}</Link></li>
+              <li><Link href="/practice-areas" aria-label="View all 17 practice areas" className="text-[#52a632] hover:underline font-semibold">{t.viewAll17}</Link></li>
             </ul>
           </div>
 
           {/* Column 3: Resources & California Counties */}
           <div className="space-y-3">
-            <h4 className="font-playfair font-bold text-sm text-white tracking-wide">
+            <p className="font-playfair font-bold text-sm text-white tracking-wide">
               {t.caResources}
-            </h4>
+            </p>
             <ul className="space-y-2 text-xs text-gray-400">
               <li><Link href="/legal-resources" className="hover:text-white transition-colors">{t.legalGuides}</Link></li>
               <li><Link href="/california" className="hover:text-white transition-colors">{t.countyDirectories}</Link></li>
@@ -97,11 +97,11 @@ export default function Footer() {
 
           {/* Column 4: Platform & Directory */}
           <div className="space-y-3">
-            <h4 className="font-playfair font-bold text-sm text-white tracking-wide">
+            <p className="font-playfair font-bold text-sm text-white tracking-wide">
               {t.platformDir}
-            </h4>
+            </p>
             <ul className="space-y-2 text-xs text-gray-400">
-              <li><Link href="/intake" className="text-[#52a632] font-semibold hover:underline">{t.startIntake}</Link></li>
+              <li><Link href="/intake" aria-label="Start case intake" className="text-[#52a632] font-semibold hover:underline">{t.startIntake}</Link></li>
               <li><Link href="/attorneys" className="hover:text-white transition-colors">{t.attorneyDir}</Link></li>
               <li><Link href="/how-it-works" className="hover:text-white transition-colors">{language === 'es' ? 'Cómo Funciona' : 'How It Works'}</Link></li>
               <li><Link href="/for-attorneys" className="hover:text-white transition-colors">{t.forAttorneys}</Link></li>
@@ -150,13 +150,13 @@ export default function Footer() {
             </div>
 
             <div className="flex items-center gap-4 text-gray-400">
-              <Link href="/privacy-policy" className="hover:underline">{language === 'es' ? 'Privacidad' : 'Privacy'}</Link>
+              <Link href="/privacy-policy" aria-label="Legal Privacy Policy notice" className="hover:underline">{language === 'es' ? 'Privacidad' : 'Privacy'}</Link>
               <span>•</span>
-              <Link href="/terms-of-use" className="hover:underline">{language === 'es' ? 'Términos' : 'Terms'}</Link>
+              <Link href="/terms-of-use" aria-label="Platform Terms of Use" className="hover:underline">{language === 'es' ? 'Términos' : 'Terms'}</Link>
               <span>•</span>
-              <Link href="/disclaimer" className="hover:underline">{language === 'es' ? 'Aviso Legal' : 'Disclaimer'}</Link>
+              <Link href="/disclaimer" aria-label="Statutory Attorney Disclaimer" className="hover:underline">{language === 'es' ? 'Aviso Legal' : 'Disclaimer'}</Link>
               <span>•</span>
-              <Link href="/accessibility" className="hover:underline">{language === 'es' ? 'Accesibilidad' : 'Accessibility'}</Link>
+              <Link href="/accessibility" aria-label="Digital Accessibility Statement" className="hover:underline">{language === 'es' ? 'Accesibilidad' : 'Accessibility'}</Link>
             </div>
           </div>
         </div>

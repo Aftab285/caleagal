@@ -1,7 +1,13 @@
 'use client';
 
 import React from 'react';
-import { MessageSquare, Users, Scale, Handshake, ArrowRight } from 'lucide-react';
+import { 
+  FileEdit, 
+  UserCheck, 
+  PhoneCall, 
+  Award, 
+  ArrowRight 
+} from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/data/translations';
 
@@ -11,38 +17,38 @@ export default function HowItWorks() {
 
   const steps = [
     {
-      number: '01',
+      number: '1',
+      icon: FileEdit,
       title: t.step1,
       description: t.step1Desc,
-      icon: MessageSquare,
     },
     {
-      number: '02',
+      number: '2',
+      icon: UserCheck,
       title: t.step2,
       description: t.step2Desc,
-      icon: Users,
     },
     {
-      number: '03',
+      number: '3',
+      icon: PhoneCall,
       title: t.step3,
       description: t.step3Desc,
-      icon: Scale,
     },
     {
-      number: '04',
+      number: '4',
+      icon: Award,
       title: t.step4,
       description: t.step4Desc,
-      icon: Handshake,
     },
   ];
 
   return (
-    <section id="how-it-works" className="py-16 bg-white border-b border-[#e2e8f0]">
+    <section id="how-it-works" className="py-16 bg-white border-b border-[#cbd5e1]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Section Heading with Centered Green Accent Bar */}
+        {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#edf7e8] border border-[#cde8c5] text-[#3d7826] text-xs font-bold uppercase tracking-wider mb-3 shadow-2xs">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#edf7e8] border border-[#d5edd0] text-[#3d7826] text-xs font-bold uppercase tracking-wider mb-3 shadow-2xs">
             {t.badge}
           </div>
           <h2 className="font-playfair text-3xl sm:text-4xl font-bold text-[#0f233a] tracking-tight">
@@ -54,9 +60,8 @@ export default function HowItWorks() {
           </p>
         </div>
 
-        {/* Inner Card Container for Step Rail */}
-        <div className="bg-[#f8fafc] rounded-3xl p-8 sm:p-10 border border-[#cbd5e1] shadow-xs max-w-5xl mx-auto">
-          {/* 4 Steps in 1 Single Horizontal Line */}
+        {/* 4 Connected Process Steps in 1 Line */}
+        <div className="bg-[#f8fafc] border border-[#cbd5e1] rounded-3xl p-6 sm:p-10 shadow-xs">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-3">
             {steps.map((step, idx) => {
               const Icon = step.icon;
@@ -74,10 +79,10 @@ export default function HowItWorks() {
                       </span>
                     </div>
 
-                    {/* Step Title with Playfair */}
-                    <h3 className="font-playfair text-base sm:text-lg font-bold text-[#0f233a] mb-1">
+                    {/* Step Title (semantic paragraph for SEO balance) */}
+                    <p className="font-playfair text-base sm:text-lg font-bold text-[#0f233a] mb-1">
                       {step.title}
-                    </h3>
+                    </p>
 
                     {/* Step Description */}
                     <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">

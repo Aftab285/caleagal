@@ -19,7 +19,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-1.5 sm:py-2 flex items-center justify-between">
         
         {/* Brand Logo: Prominently sized on both mobile and desktop */}
-        <Link href="/" className="flex items-center group py-0.5">
+        <Link href="/" aria-label="CA Legal Source Homepage" className="flex items-center group py-0.5">
           <div className="relative flex items-center">
             <Image
               src="/logo.png"
@@ -56,8 +56,8 @@ export default function Header() {
                 <Link href="/practice-areas/employment" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
                   {language === 'es' ? 'Derecho Laboral' : 'Employment Law'}
                 </Link>
-                <Link href="/practice-areas/personal-injury" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
-                  {language === 'es' ? 'Accidentes de Auto' : 'Car Accidents'}
+                <Link href="/legal-resources/california-car-accident-step-by-step-guide" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
+                  {language === 'es' ? 'Guía de Accidentes de Auto' : 'Car Accident Guide'}
                 </Link>
                 <Link href="/practice-areas/family-law" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
                   {language === 'es' ? 'Derecho Familiar' : 'Family Law'}
@@ -120,6 +120,7 @@ export default function Header() {
         <div className="hidden sm:flex items-center">
           <a
             href="tel:7603720007"
+            aria-label="Call CA Legal Source phone (760) 372-0007"
             className="flex items-center gap-2 px-5 py-2 rounded-full border border-gray-300 hover:border-[#3d7826] bg-white text-[#0f233a] hover:text-[#3d7826] transition-all duration-200 shadow-xs font-semibold text-sm group"
           >
             <Phone className="w-4 h-4 text-[#3d7826] group-hover:scale-110 transition-transform" />
@@ -185,6 +186,7 @@ export default function Header() {
           <div className="pt-2">
             <a
               href="tel:7603720007"
+              aria-label="Call CA Legal Source on mobile (760) 372-0007"
               className="flex items-center justify-center gap-2 w-full py-2.5 rounded-full border border-[#3d7826] text-[#3d7826] font-semibold text-sm"
             >
               <Phone className="w-4 h-4 text-[#3d7826]" />

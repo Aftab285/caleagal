@@ -209,9 +209,9 @@ export default function HeroSection() {
               
               {/* Card Header */}
               <div className="text-center pb-4 border-b border-gray-100">
-                <h2 className="font-playfair text-[20px] sm:text-[22px] lg:text-2xl font-bold text-[#0f233a]">
+                <p className="font-playfair text-[20px] sm:text-[22px] lg:text-2xl font-bold text-[#0f233a]">
                   {t.intakeTitle}
-                </h2>
+                </p>
                 <p className="text-xs sm:text-sm font-semibold text-[#3d7826] mt-0.5">
                   {t.intakeSubtitle}
                 </p>
@@ -255,9 +255,9 @@ export default function HeroSection() {
                     <div className="w-12 h-12 bg-[#edf7e8] text-[#3d7826] rounded-full flex items-center justify-center mx-auto shadow-sm">
                       <CheckCircle2 className="w-7 h-7" />
                     </div>
-                    <h3 className="font-playfair text-xl font-bold text-[#0f233a]">
+                    <p className="font-playfair text-xl font-bold text-[#0f233a]">
                       {t.thankYouTitle}
-                    </h3>
+                    </p>
                     <p className="text-xs text-gray-600 leading-relaxed">
                       {t.thankYouDesc}
                     </p>
