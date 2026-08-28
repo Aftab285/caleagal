@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/data/translations';
@@ -116,17 +116,6 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* Right Action: Direct Primary Form CTA Button */}
-        <div className="hidden sm:flex items-center">
-          <Link
-            href="/intake"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#3d7826] hover:bg-[#32641e] text-white font-semibold text-xs sm:text-sm transition-all duration-200 shadow-xs hover:scale-[1.01]"
-          >
-            <span>{language === 'es' ? 'Evaluación Gratuita' : 'Get a Free Case Review'}</span>
-            <ArrowRight className="w-3.5 h-3.5 text-[#85db61]" />
-          </Link>
-        </div>
-
         {/* Mobile Hamburger Toggle */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -182,16 +171,6 @@ export default function Header() {
           >
             {t.contact}
           </Link>
-          <div className="pt-2">
-            <Link
-              href="/intake"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-center gap-2 w-full py-3 rounded-lg bg-[#3d7826] hover:bg-[#32641e] text-white font-semibold text-sm transition-all"
-            >
-              <span>{language === 'es' ? 'Evaluación Gratuita' : 'Get a Free Case Review'}</span>
-              <ArrowRight className="w-4 h-4 text-[#85db61]" />
-            </Link>
-          </div>
         </div>
       )}
     </header>

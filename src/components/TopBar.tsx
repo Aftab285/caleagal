@@ -1,8 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Globe, ArrowRight, ShieldCheck } from 'lucide-react';
-import Link from 'next/link';
+import { Globe, ShieldCheck } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/data/translations';
 
@@ -44,17 +43,6 @@ export default function TopBar() {
               Español
             </button>
           </div>
-
-          <span className="text-gray-500">|</span>
-
-          {/* Connected CTA link instead of phone */}
-          <Link 
-            href="/intake" 
-            className="flex items-center gap-1.5 text-[#52a632] hover:text-[#67c443] font-semibold transition-colors"
-          >
-            <span>{language === 'es' ? 'Evaluación Gratuita' : 'Free Case Review'}</span>
-            <ArrowRight className="w-3 h-3" />
-          </Link>
         </div>
       </div>
     </div>

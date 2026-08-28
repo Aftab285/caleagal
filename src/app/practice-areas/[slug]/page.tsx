@@ -107,21 +107,14 @@ export default async function PracticeAreaDetailPage({ params }: PageProps) {
               {area.supportingText}
             </div>
 
-            {/* Hero CTA Actions */}
-            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 max-w-xl">
+            {/* Prominent Single Primary Hero CTA */}
+            <div className="pt-2 max-w-lg">
               <Link
                 href={`/intake?area=${encodeURIComponent(area.slug)}`}
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#3d7826] hover:bg-[#32641e] text-white font-semibold text-sm sm:text-base transition-all duration-200 shadow-lg hover:scale-[1.01]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[#3d7826] hover:bg-[#32641e] text-white font-bold text-base sm:text-lg transition-all duration-200 shadow-[0_10px_25px_rgba(61,120,38,0.4)] hover:shadow-[0_12px_30px_rgba(61,120,38,0.55)] hover:scale-[1.02] border border-[#52a632]/50 cursor-pointer"
               >
                 <span>{area.primaryCta}</span>
-                <ArrowRight className="w-4 h-4 text-[#85db61]" />
-              </Link>
-
-              <Link
-                href="/how-it-works"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-sm transition-all duration-200"
-              >
-                <span>{area.secondaryCta || 'See How It Works'}</span>
+                <ArrowRight className="w-5 h-5 text-[#85db61] shrink-0" />
               </Link>
             </div>
 
