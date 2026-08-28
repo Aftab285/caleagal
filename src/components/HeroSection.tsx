@@ -96,7 +96,7 @@ export default function HeroSection() {
         setSubmitted(true);
       } catch (err: any) {
         console.error('Intake submission error:', err);
-        setSubmitError(err.message || (language === 'es' ? 'Hubo un problema al enviar. Por favor llame al (760) 372-0007.' : 'There was an issue submitting. Please call (760) 372-0007.'));
+        setSubmitError(err.message || (language === 'es' ? 'Hubo un problema al enviar. Por favor intente de nuevo o escriba a questions@dpalaw.com.' : 'There was an issue submitting. Please try again or email questions@dpalaw.com.'));
       } finally {
         setIsSubmitting(false);
       }
@@ -439,7 +439,7 @@ export default function HeroSection() {
                           </label>
                           <input
                             type="tel"
-                            placeholder="(760) 372-0007"
+                            placeholder="(760) 555-0123"
                             value={formData.phone}
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                             className="w-full px-3 py-2 text-xs sm:text-sm bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3d7826]/30 focus:border-[#3d7826]"

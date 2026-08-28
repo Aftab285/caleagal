@@ -154,18 +154,15 @@ export default async function AttorneyProfileDetailPage({ params }: PageProps) {
                 </p>
 
                 <Link
-                  href="/#hero-intake"
-                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-[#3d7826] hover:bg-[#32641e] text-white font-semibold text-sm transition-all"
+                  href="/intake"
+                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-[#3d7826] hover:bg-[#32641e] text-white font-semibold text-sm transition-all shadow-xs"
                 >
                   <span>Start Free Case Review</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 text-[#85db61]" />
                 </Link>
 
-                <div className="pt-2 text-center">
-                  <a href="tel:8001234567" className="text-xs font-semibold text-[#0f233a] hover:text-[#3d7826] flex items-center justify-center gap-1.5">
-                    <Phone className="w-3.5 h-3.5 text-[#3d7826]" />
-                    <span>(800) 123-4567</span>
-                  </a>
+                <div className="pt-2 text-center text-xs text-gray-500">
+                  <span>Confidential • No obligation • All 58 Counties</span>
                 </div>
               </div>
             </div>

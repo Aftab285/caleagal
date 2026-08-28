@@ -99,13 +99,6 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-center gap-3 pt-2 border-t border-gray-200">
-                    <Phone className="w-4 h-4 text-[#3d7826] shrink-0" />
-                    <a href="tel:7603720007" className="font-semibold text-[#0f233a] hover:text-[#3d7826]">
-                      (760) 372-0007
-                    </a>
-                  </div>
-
-                  <div className="flex items-center gap-3">
                     <Mail className="w-4 h-4 text-[#3d7826] shrink-0" />
                     <a href="mailto:questions@dpalaw.com" className="font-medium text-[#0f233a] hover:text-[#3d7826]">
                       questions@dpalaw.com

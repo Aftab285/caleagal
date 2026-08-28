@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Phone, Globe } from 'lucide-react';
+import { Globe, ArrowRight, ShieldCheck } from 'lucide-react';
+import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/data/translations';
 
@@ -12,8 +13,9 @@ export default function TopBar() {
   return (
     <div className="bg-[#0b1d33] text-gray-200 text-xs py-2 px-4 sm:px-8 border-b border-[#162e4d]">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-        <div className="text-gray-300 font-normal tracking-wide text-center sm:text-left">
-          {t.tagline}
+        <div className="text-gray-300 font-normal tracking-wide text-center sm:text-left flex items-center gap-1.5">
+          <ShieldCheck className="w-3.5 h-3.5 text-[#52a632]" />
+          <span>{t.tagline}</span>
         </div>
 
         <div className="flex items-center space-x-3 text-xs font-medium">
@@ -45,13 +47,14 @@ export default function TopBar() {
 
           <span className="text-gray-500">|</span>
 
-          <a 
-            href="tel:7603720007" 
+          {/* Connected CTA link instead of phone */}
+          <Link 
+            href="/intake" 
             className="flex items-center gap-1.5 text-[#52a632] hover:text-[#67c443] font-semibold transition-colors"
           >
-            <Phone className="w-3.5 h-3.5 fill-current" />
-            <span>(760) 372-0007</span>
-          </a>
+            <span>{language === 'es' ? 'Evaluación Gratuita' : 'Free Case Review'}</span>
+            <ArrowRight className="w-3 h-3" />
+          </Link>
         </div>
       </div>
     </div>

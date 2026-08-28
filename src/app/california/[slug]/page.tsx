@@ -69,19 +69,18 @@ export default async function CountyDetailPage({ params }: PageProps) {
 
             <div className="pt-2 flex flex-wrap gap-4">
               <Link
-                href="/#hero-intake"
+                href="/intake"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#3d7826] hover:bg-[#32641e] text-white font-semibold text-sm transition-all"
               >
                 <span>Start {county.name} Case Review</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 text-[#85db61]" />
               </Link>
-              <a
-                href="tel:8001234567"
+              <Link
+                href="/how-it-works"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-sm transition-all"
               >
-                <Phone className="w-4 h-4 text-[#85db61]" />
-                <span>Call (800) 123-4567</span>
-              </a>
+                <span>See How It Works</span>
+              </Link>
             </div>
           </div>
         </div>

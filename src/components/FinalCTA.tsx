@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { ArrowRight, ShieldCheck, Phone } from 'lucide-react';
+import { ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/data/translations';
@@ -12,8 +12,8 @@ export default function FinalCTA() {
   const t = translations[language].finalCta;
 
   return (
-    <section className="py-24 text-white relative overflow-hidden bg-[#071322]">
-      {/* Background Image: Vivid California Downtown Skyline at Twilight */}
+    <section className="py-20 lg:py-24 text-white relative overflow-hidden bg-[#071322]">
+      {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/final-cta-bg.jpg"
@@ -21,8 +21,7 @@ export default function FinalCTA() {
           fill
           className="object-cover object-center opacity-75"
         />
-        {/* Soft, translucent rich navy overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#071322]/90 via-[#0f233a]/65 to-[#071322]/85" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#071322]/95 via-[#0f233a]/75 to-[#071322]/90" />
       </div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-8 text-center relative z-10 space-y-6">
@@ -42,23 +41,30 @@ export default function FinalCTA() {
 
         <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
-            href="#hero-intake"
+            href="/intake"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-[#3d7826] hover:bg-[#32641e] text-white font-semibold text-base transition-all duration-200 shadow-xl hover:scale-[1.02] cursor-pointer"
           >
             <span>{t.button}</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 text-[#85db61]" />
           </Link>
 
-          <a
-            href="tel:7603720007"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/30 text-white font-semibold text-base transition-all duration-200 cursor-pointer shadow-lg"
+          <Link
+            href="/how-it-works"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/25 text-white font-semibold text-base transition-all duration-200 cursor-pointer shadow-lg"
           >
-            <Phone className="w-4 h-4 text-[#85db61]" />
-            <span>(760) 372-0007</span>
-          </a>
+            <span>{language === 'es' ? 'Cómo Funciona el Proceso' : 'See How It Works'}</span>
+          </Link>
         </div>
 
-        <p className="text-xs text-gray-200 max-w-xl mx-auto pt-3 leading-relaxed drop-shadow-xs">
+        <div className="pt-2 flex items-center justify-center gap-4 text-xs text-gray-300 flex-wrap">
+          <span className="flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5 text-[#85db61]" /> Serving All 58 Counties</span>
+          <span>•</span>
+          <span className="flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5 text-[#85db61]" /> Confidential Inquiry</span>
+          <span>•</span>
+          <span className="flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5 text-[#85db61]" /> Free Case Review for Qualifying Matters</span>
+        </div>
+
+        <p className="text-xs text-gray-300 max-w-xl mx-auto pt-2 leading-relaxed drop-shadow-xs">
           {t.disclaimer}
         </p>
 

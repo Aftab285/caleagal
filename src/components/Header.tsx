@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Phone, ChevronDown, Menu, X } from 'lucide-react';
+import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/data/translations';
@@ -18,7 +18,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-white/98 backdrop-blur-md border-b border-gray-200 shadow-2xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-1.5 sm:py-2 flex items-center justify-between">
         
-        {/* Brand Logo: Prominently sized on both mobile and desktop */}
+        {/* Brand Logo */}
         <Link href="/" aria-label="CA Legal Source Homepage" className="flex items-center group py-0.5">
           <div className="relative flex items-center">
             <Image
@@ -32,7 +32,7 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* Desktop Navigation with Inter Medium */}
+        {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-7 text-[15px] font-medium text-[#1e293b]">
           {/* Practice Areas Dropdown */}
           <div 
@@ -116,16 +116,15 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* Right Action: Phone Pill Button */}
+        {/* Right Action: Direct Primary Form CTA Button */}
         <div className="hidden sm:flex items-center">
-          <a
-            href="tel:7603720007"
-            aria-label="Call CA Legal Source phone (760) 372-0007"
-            className="flex items-center gap-2 px-5 py-2 rounded-full border border-gray-300 hover:border-[#3d7826] bg-white text-[#0f233a] hover:text-[#3d7826] transition-all duration-200 shadow-xs font-semibold text-sm group"
+          <Link
+            href="/intake"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#3d7826] hover:bg-[#32641e] text-white font-semibold text-xs sm:text-sm transition-all duration-200 shadow-xs hover:scale-[1.01]"
           >
-            <Phone className="w-4 h-4 text-[#3d7826] group-hover:scale-110 transition-transform" />
-            <span>(760) 372-0007</span>
-          </a>
+            <span>{language === 'es' ? 'Evaluación Gratuita' : 'Get a Free Case Review'}</span>
+            <ArrowRight className="w-3.5 h-3.5 text-[#85db61]" />
+          </Link>
         </div>
 
         {/* Mobile Hamburger Toggle */}
@@ -184,14 +183,14 @@ export default function Header() {
             {t.contact}
           </Link>
           <div className="pt-2">
-            <a
-              href="tel:7603720007"
-              aria-label="Call CA Legal Source on mobile (760) 372-0007"
-              className="flex items-center justify-center gap-2 w-full py-2.5 rounded-full border border-[#3d7826] text-[#3d7826] font-semibold text-sm"
+            <Link
+              href="/intake"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center justify-center gap-2 w-full py-3 rounded-lg bg-[#3d7826] hover:bg-[#32641e] text-white font-semibold text-sm transition-all"
             >
-              <Phone className="w-4 h-4 text-[#3d7826]" />
-              <span>(760) 372-0007</span>
-            </a>
+              <span>{language === 'es' ? 'Evaluación Gratuita' : 'Get a Free Case Review'}</span>
+              <ArrowRight className="w-4 h-4 text-[#85db61]" />
+            </Link>
           </div>
         </div>
       )}

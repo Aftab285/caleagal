@@ -5,6 +5,18 @@ export interface PracticeAreaDetail {
   name: string;
   nameEs: string;
   slug: string;
+  eyebrow: string;
+  eyebrowEs?: string;
+  h1: string;
+  h1Es?: string;
+  subhead: string;
+  subheadEs?: string;
+  primaryCta: string;
+  primaryCtaEs?: string;
+  secondaryCta: string;
+  secondaryCtaEs?: string;
+  supportingText: string;
+  supportingTextEs?: string;
   shortDesc: string;
   shortDescEs: string;
   iconName: string;
@@ -20,6 +32,13 @@ export interface PracticeAreaDetail {
   californiaLawsEs: string[];
   whenToConsult: string[];
   whenToConsultEs: string[];
+  howWeHelp?: string[];
+  howWeHelpEs?: string[];
+  whatHappensAfter?: string[];
+  whatHappensAfterEs?: string[];
+  relatedCounties?: { name: string; slug: string }[];
+  relatedGuides?: { title: string; slug: string }[];
+  relatedPracticeAreas?: { name: string; slug: string }[];
   faqs: { question: string; questionEs: string; answer: string; answerEs: string }[];
 }
 

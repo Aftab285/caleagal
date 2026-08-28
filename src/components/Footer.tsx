@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Phone, Mail, MapPin, Shield, Building2 } from 'lucide-react';
+import { Mail, MapPin, Shield, Building2, ArrowRight, ShieldCheck } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/data/translations';
 
@@ -46,11 +46,12 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="pt-1 space-y-2 text-xs text-gray-400">
-              <a href="tel:7603720007" aria-label="Call CA Legal Source phone (760) 372-0007" className="flex items-center gap-2 hover:text-white transition-colors">
-                <Phone className="w-3.5 h-3.5 text-[#52a632]" />
-                <span className="text-gray-200 font-medium">(760) 372-0007</span>
-              </a>
+            <div className="pt-1 space-y-2.5 text-xs text-gray-400">
+              <Link href="/intake" className="flex items-center gap-2 text-[#85db61] hover:text-[#a2ea83] font-semibold transition-colors">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>Start Free Case Evaluation Online</span>
+                <ArrowRight className="w-3 h-3" />
+              </Link>
               <a href="mailto:questions@dpalaw.com" aria-label="Email DPA Attorneys at Law" className="flex items-center gap-2 hover:text-white transition-colors">
                 <Mail className="w-3.5 h-3.5 text-[#52a632]" />
                 <span>questions@dpalaw.com</span>
