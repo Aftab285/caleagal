@@ -31,6 +31,17 @@ export interface ContactEmailPayload {
   message: string;
 }
 
+export interface AttorneyInquiryPayload {
+  fullName: string;
+  barNumber: string;
+  firmName?: string;
+  email: string;
+  phone: string;
+  practiceAreas?: string;
+  primaryCounty?: string;
+  notes?: string;
+}
+
 const RECIPIENT_EMAIL = 'aftabnew77@gmail.com';
 const FROM_EMAIL = 'forms@calegalsource.com';
 const FALLBACK_FROM_EMAIL = 'onboarding@resend.dev';
@@ -104,7 +115,6 @@ export async function sendIntakeWithResend(data: IntakeEmailPayload) {
     throw new Error('Resend API key is not configured on the server.');
   }
 
-  // Attempt sending from forms@calegalsource.com, with automated fallback to onboarding@resend.dev if domain not yet verified
   try {
     const result = await resend.emails.send({
       from: `CA Legal Source <${FROM_EMAIL}>`,
@@ -212,6 +222,104 @@ export async function sendContactWithResend(data: ContactEmailPayload) {
     return result;
   } catch (err: any) {
     console.error('[Resend Error in sendContactWithResend]:', err);
+    throw err;
+  }
+}
+
+export async function sendAttorneyInquiryWithResend(data: AttorneyInquiryPayload) {
+  const resend = getResendClient();
+  const timestamp = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
+  const subject = `New Attorney Panel Application: ${data.fullName.trim()} (Bar #${data.barNumber.trim()}) - ${data.firmName || 'Independent Practice'}`;
+
+  const html = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; background-color: #ffffff;">
+      <div style="background-color: #0f233a; color: #ffffff; padding: 20px; text-align: center;">
+        <h2 style="margin: 0; font-size: 20px; letter-spacing: -0.5px;">New Attorney Panel Application</h2>
+        <p style="margin: 4px 0 0; color: #85db61; font-size: 12px; font-weight: bold; text-transform: uppercase;">California Referral Network</p>
+      </div>
+
+      <div style="padding: 24px; color: #1e293b; line-height: 1.6; font-size: 14px;">
+        <h3 style="color: #0f233a; font-size: 15px; margin: 0 0 12px; border-bottom: 2px solid #f1f5f9; padding-bottom: 6px;">Attorney Credentials</h3>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13.5px;">
+          <tr>
+            <td style="padding: 6px 0; width: 160px; color: #64748b;"><strong>Attorney Name:</strong></td>
+            <td style="padding: 6px 0; font-weight: bold; color: #0f233a;">${data.fullName.trim()}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #64748b;"><strong>CA State Bar Number:</strong></td>
+            <td style="padding: 6px 0; font-weight: bold; color: #3d7826;">#${data.barNumber.trim()}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #64748b;"><strong>Law Firm / Practice:</strong></td>
+            <td style="padding: 6px 0;">${data.firmName ? data.firmName.trim() : 'Independent Practice'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #64748b;"><strong>Email Address:</strong></td>
+            <td style="padding: 6px 0;"><a href="mailto:${encodeURIComponent(data.email)}" style="color: #0f233a;">${data.email.trim()}</a></td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #64748b;"><strong>Phone Number:</strong></td>
+            <td style="padding: 6px 0;"><a href="tel:${encodeURIComponent(data.phone)}" style="color: #3d7826; font-weight: bold; text-decoration: none;">${data.phone.trim()}</a></td>
+          </tr>
+        </table>
+
+        <h3 style="color: #0f233a; font-size: 15px; margin: 0 0 12px; border-bottom: 2px solid #f1f5f9; padding-bottom: 6px;">Practice & Jurisdiction</h3>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13.5px;">
+          <tr>
+            <td style="padding: 6px 0; width: 160px; color: #64748b;"><strong>Primary County(ies):</strong></td>
+            <td style="padding: 6px 0; font-weight: bold; color: #0f233a;">${data.primaryCounty || 'California'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #64748b;"><strong>Practice Focus Areas:</strong></td>
+            <td style="padding: 6px 0;">${data.practiceAreas || 'General California Practice'}</td>
+          </tr>
+        </table>
+
+        ${data.notes ? `
+          <h3 style="color: #0f233a; font-size: 15px; margin: 0 0 12px; border-bottom: 2px solid #f1f5f9; padding-bottom: 6px;">Additional Information / Notes</h3>
+          <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px; white-space: pre-wrap; font-size: 13.5px;">${data.notes}</div>
+        ` : ''}
+      </div>
+
+      <div style="background-color: #f8fafc; border-top: 1px solid #e2e8f0; padding: 14px 24px; font-size: 11px; color: #64748b; text-align: center;">
+        Application Received: ${timestamp} (Pacific Time)<br />
+        CA Legal Source • Referral Panel Administration
+      </div>
+    </div>
+  `;
+
+  if (!resend) {
+    throw new Error('Resend API key is not configured on the server.');
+  }
+
+  try {
+    const result = await resend.emails.send({
+      from: `CA Legal Source <${FROM_EMAIL}>`,
+      to: [RECIPIENT_EMAIL],
+      replyTo: data.email.trim(),
+      subject: subject,
+      html: html,
+    });
+
+    if (result.error) {
+      console.warn('[Resend] Primary domain sending failed, retrying with fallback domain:', result.error);
+      const fallbackResult = await resend.emails.send({
+        from: `CA Legal Source <${FALLBACK_FROM_EMAIL}>`,
+        to: [RECIPIENT_EMAIL],
+        replyTo: data.email.trim(),
+        subject: subject,
+        html: html,
+      });
+
+      if (fallbackResult.error) {
+        throw new Error(fallbackResult.error.message);
+      }
+      return fallbackResult;
+    }
+
+    return result;
+  } catch (err: any) {
+    console.error('[Resend Error in sendAttorneyInquiryWithResend]:', err);
     throw err;
   }
 }
