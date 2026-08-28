@@ -5,15 +5,16 @@ import TopBar from '@/components/TopBar';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { legalGuidesData } from '@/data/legalGuides';
-import { BookOpen, Clock, User, ArrowRight, ShieldCheck } from 'lucide-react';
+import { getMultilingualMetadata } from '@/lib/i18nRoutes';
+import { BookOpen, Clock, ArrowRight, ShieldCheck } from 'lucide-react';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getMultilingualMetadata({
+  locale: 'en',
+  enPath: '/legal-resources',
+  esPath: '/es/recursos',
   title: 'California Legal Resources & Guides | CA Legal Source',
   description: 'Authoritative, California-specific legal guides on overtime wage laws, tenant habitability rights, mold remedies, accident checklists, and consumer laws.',
-  alternates: {
-    canonical: 'https://www.calegalsource.com/legal-resources',
-  },
-};
+});
 
 export default function LegalResourcesHubPage() {
   return (

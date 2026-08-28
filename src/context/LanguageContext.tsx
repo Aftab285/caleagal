@@ -1,8 +1,9 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
-type Language = 'en' | 'es';
+export type Language = 'en' | 'es';
 
 interface LanguageContextType {
   language: Language;
@@ -16,19 +17,33 @@ const LanguageContext = createContext<LanguageContextType>({
   toggleLanguage: () => {},
 });
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>('en');
+export function LanguageProvider({ 
+  children,
+  initialLanguage,
+}: { 
+  children: React.ReactNode;
+  initialLanguage?: Language;
+}) {
+  const pathname = usePathname();
+  const isSpanishPath = pathname?.startsWith('/es') ?? false;
+  const derivedLang: Language = initialLanguage || (isSpanishPath ? 'es' : 'en');
+  
+  const [language, setLanguageState] = useState<Language>(derivedLang);
 
   useEffect(() => {
-    const saved = localStorage.getItem('calegal_lang') as Language;
-    if (saved && (saved === 'en' || saved === 'es')) {
-      setLanguageState(saved);
+    const isEs = pathname?.startsWith('/es') ?? false;
+    if (isEs) {
+      setLanguageState('es');
+    } else {
+      setLanguageState('en');
     }
-  }, []);
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = isEs ? 'es' : 'en';
+    }
+  }, [pathname]);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem('calegal_lang', lang);
   };
 
   const toggleLanguage = () => {

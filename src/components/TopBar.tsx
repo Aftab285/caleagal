@@ -2,12 +2,18 @@
 
 import React from 'react';
 import { Globe, ShieldCheck } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/data/translations';
+import { getEquivalentRoutes } from '@/lib/i18nRoutes';
 
 export default function TopBar() {
-  const { language, setLanguage } = useLanguage();
+  const pathname = usePathname() || '/';
+  const { language } = useLanguage();
   const t = translations[language].topBar;
+
+  const { enPath, esPath } = getEquivalentRoutes(pathname);
 
   return (
     <div className="bg-[#0b1d33] text-gray-200 text-xs py-2 px-4 sm:px-8 border-b border-[#162e4d]">
@@ -18,30 +24,32 @@ export default function TopBar() {
         </div>
 
         <div className="flex items-center space-x-3 text-xs font-medium">
-          {/* Language Switcher */}
+          {/* True URL-based Language Switcher */}
           <div className="flex items-center gap-1 bg-white/10 px-2 py-0.5 rounded-full border border-white/15">
             <Globe className="w-3 h-3 text-[#52a632]" />
-            <button
-              onClick={() => setLanguage('en')}
-              className={`px-1.5 py-0.5 rounded text-[11px] font-semibold transition-all cursor-pointer ${
+            <Link
+              href={enPath}
+              aria-label="Switch website language to English"
+              className={`px-1.5 py-0.5 rounded text-[11px] font-semibold transition-all ${
                 language === 'en'
                   ? 'bg-[#52a632] text-white shadow-2xs'
                   : 'text-gray-300 hover:text-white'
               }`}
             >
               English
-            </button>
+            </Link>
             <span className="text-gray-500 text-[10px]">/</span>
-            <button
-              onClick={() => setLanguage('es')}
-              className={`px-1.5 py-0.5 rounded text-[11px] font-semibold transition-all cursor-pointer ${
+            <Link
+              href={esPath}
+              aria-label="Cambiar idioma del sitio a Español"
+              className={`px-1.5 py-0.5 rounded text-[11px] font-semibold transition-all ${
                 language === 'es'
                   ? 'bg-[#52a632] text-white shadow-2xs'
                   : 'text-gray-300 hover:text-white'
               }`}
             >
               Español
-            </button>
+            </Link>
           </div>
         </div>
       </div>

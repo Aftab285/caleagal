@@ -10,6 +10,35 @@ import { translations } from '@/data/translations';
 export default function Footer() {
   const { language } = useLanguage();
   const t = translations[language].footer;
+  const isEs = language === 'es';
+
+  // Dynamic routes based on locale
+  const homeHref = isEs ? '/es' : '/';
+  const intakeHref = isEs ? '/es/evaluacion-gratuita' : '/intake';
+  const practiceAreasHref = isEs ? '/es/areas-de-practica' : '/practice-areas';
+  const employmentHref = isEs ? '/es/areas-de-practica/derecho-laboral' : '/practice-areas/employment';
+  const personalInjuryHref = isEs ? '/es/areas-de-practica/lesiones-personales' : '/practice-areas/personal-injury';
+  const tenantHref = isEs ? '/es/areas-de-practica/arrendador-inquilino' : '/practice-areas/landlord-tenant';
+  const adaHref = isEs ? '/es/areas-de-practica/ada-discapacidad' : '/practice-areas/ada-disability';
+  const consumerHref = isEs ? '/es/areas-de-practica/proteccion-al-consumidor' : '/practice-areas/consumer-protection';
+  const familyHref = isEs ? '/es/areas-de-practica/derecho-familiar' : '/practice-areas/family-law';
+  const immigrationHref = isEs ? '/es/areas-de-practica/inmigracion' : '/practice-areas/immigration';
+  const resourcesHref = isEs ? '/es/recursos' : '/legal-resources';
+  const californiaHref = isEs ? '/es/california' : '/california';
+  const laCountyHref = isEs ? '/es/california/condado-de-los-angeles' : '/california/los-angeles-county';
+  const sdCountyHref = isEs ? '/es/california/condado-de-san-diego' : '/california/san-diego-county';
+  const ocCountyHref = isEs ? '/es/california/condado-de-orange' : '/california/orange-county';
+  const sfCountyHref = isEs ? '/es/california/condado-de-san-francisco' : '/california/san-francisco-county';
+  const faqsHref = isEs ? '/es#faqs' : '/#faqs';
+  const attorneysHref = isEs ? '/es/abogados' : '/attorneys';
+  const howItWorksHref = isEs ? '/es/como-funciona' : '/how-it-works';
+  const forAttorneysHref = isEs ? '/es/para-abogados' : '/for-attorneys';
+  const aboutHref = isEs ? '/es/quienes-somos' : '/about';
+  const contactHref = isEs ? '/es/contacto' : '/contact';
+  const privacyHref = isEs ? '/es/politica-de-privacidad' : '/privacy-policy';
+  const termsHref = isEs ? '/es/terminos-de-uso' : '/terms-of-use';
+  const disclaimerHref = isEs ? '/es/aviso-legal' : '/disclaimer';
+  const accessibilityHref = isEs ? '/es/accesibilidad' : '/accessibility';
 
   return (
     <footer className="bg-[#0b1d33] text-gray-300 text-xs border-t border-[#162e4d]">
@@ -19,7 +48,7 @@ export default function Footer() {
           
           {/* Column 1: Brand, Operator & Contact Info */}
           <div className="lg:col-span-2 space-y-4">
-            <Link href="/" aria-label="CA Legal Source Home" className="inline-block group py-1">
+            <Link href={homeHref} aria-label="CA Legal Source Home" className="inline-block group py-1">
               <Image
                 src="/logo.png"
                 alt="CA Legal Source"
@@ -47,9 +76,9 @@ export default function Footer() {
             </div>
 
             <div className="pt-1 space-y-2.5 text-xs text-gray-400">
-              <Link href="/intake" className="flex items-center gap-2 text-[#85db61] hover:text-[#a2ea83] font-semibold transition-colors">
+              <Link href={intakeHref} className="flex items-center gap-2 text-[#85db61] hover:text-[#a2ea83] font-semibold transition-colors">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Start Free Case Evaluation Online</span>
+                <span>{isEs ? 'Iniciar Evaluación Gratuita en Línea' : 'Start Free Case Evaluation Online'}</span>
                 <ArrowRight className="w-3 h-3" />
               </Link>
               <a href="mailto:questions@dpalaw.com" aria-label="Email DPA Attorneys at Law" className="flex items-center gap-2 hover:text-white transition-colors">
@@ -69,14 +98,14 @@ export default function Footer() {
               {t.findHelp}
             </p>
             <ul className="space-y-2 text-xs text-gray-400">
-              <li><Link href="/practice-areas/employment" className="hover:text-white transition-colors">{language === 'es' ? 'Derecho Laboral' : 'Employment Law'}</Link></li>
-              <li><Link href="/practice-areas/personal-injury" className="hover:text-white transition-colors">{language === 'es' ? 'Lesiones Personales' : 'Personal Injury'}</Link></li>
-              <li><Link href="/practice-areas/landlord-tenant" className="hover:text-white transition-colors">{language === 'es' ? 'Inquilinos y Propietarios' : 'Landlord-Tenant Rights'}</Link></li>
-              <li><Link href="/practice-areas/ada-disability" className="hover:text-white transition-colors">{language === 'es' ? 'Discapacidad y ADA' : 'ADA & Disability Law'}</Link></li>
-              <li><Link href="/practice-areas/consumer-protection" className="hover:text-white transition-colors">{language === 'es' ? 'Protección al Consumidor' : 'Consumer Protection'}</Link></li>
-              <li><Link href="/practice-areas/family-law" className="hover:text-white transition-colors">{language === 'es' ? 'Derecho Familiar' : 'Family Law & Custody'}</Link></li>
-              <li><Link href="/practice-areas/immigration" className="hover:text-white transition-colors">{language === 'es' ? 'Inmigración en California' : 'California Immigration'}</Link></li>
-              <li><Link href="/practice-areas" aria-label="View all 17 practice areas" className="text-[#52a632] hover:underline font-semibold">{t.viewAll17}</Link></li>
+              <li><Link href={employmentHref} className="hover:text-white transition-colors">{isEs ? 'Derecho Laboral' : 'Employment Law'}</Link></li>
+              <li><Link href={personalInjuryHref} className="hover:text-white transition-colors">{isEs ? 'Lesiones Personales' : 'Personal Injury'}</Link></li>
+              <li><Link href={tenantHref} className="hover:text-white transition-colors">{isEs ? 'Inquilinos y Propietarios' : 'Landlord-Tenant Rights'}</Link></li>
+              <li><Link href={adaHref} className="hover:text-white transition-colors">{isEs ? 'Discapacidad y ADA' : 'ADA & Disability Law'}</Link></li>
+              <li><Link href={consumerHref} className="hover:text-white transition-colors">{isEs ? 'Protección al Consumidor' : 'Consumer Protection'}</Link></li>
+              <li><Link href={familyHref} className="hover:text-white transition-colors">{isEs ? 'Derecho Familiar' : 'Family Law & Custody'}</Link></li>
+              <li><Link href={immigrationHref} className="hover:text-white transition-colors">{isEs ? 'Inmigración en California' : 'California Immigration'}</Link></li>
+              <li><Link href={practiceAreasHref} aria-label="View all 17 practice areas" className="text-[#52a632] hover:underline font-semibold">{t.viewAll17}</Link></li>
             </ul>
           </div>
 
@@ -86,13 +115,13 @@ export default function Footer() {
               {t.caResources}
             </p>
             <ul className="space-y-2 text-xs text-gray-400">
-              <li><Link href="/legal-resources" className="hover:text-white transition-colors">{t.legalGuides}</Link></li>
-              <li><Link href="/california" className="hover:text-white transition-colors">{t.countyDirectories}</Link></li>
-              <li><Link href="/california/los-angeles-county" className="hover:text-white transition-colors">Los Angeles County</Link></li>
-              <li><Link href="/california/san-diego-county" className="hover:text-white transition-colors">San Diego County</Link></li>
-              <li><Link href="/california/orange-county" className="hover:text-white transition-colors">Orange County</Link></li>
-              <li><Link href="/california/san-francisco-county" className="hover:text-white transition-colors">San Francisco County</Link></li>
-              <li><Link href="/#faqs" className="hover:text-white transition-colors">{language === 'es' ? 'Preguntas Frecuentes' : 'Frequently Asked Questions'}</Link></li>
+              <li><Link href={resourcesHref} className="hover:text-white transition-colors">{t.legalGuides}</Link></li>
+              <li><Link href={californiaHref} className="hover:text-white transition-colors">{t.countyDirectories}</Link></li>
+              <li><Link href={laCountyHref} className="hover:text-white transition-colors">{isEs ? 'Condado de Los Ángeles' : 'Los Angeles County'}</Link></li>
+              <li><Link href={sdCountyHref} className="hover:text-white transition-colors">{isEs ? 'Condado de San Diego' : 'San Diego County'}</Link></li>
+              <li><Link href={ocCountyHref} className="hover:text-white transition-colors">{isEs ? 'Condado de Orange' : 'Orange County'}</Link></li>
+              <li><Link href={sfCountyHref} className="hover:text-white transition-colors">{isEs ? 'Condado de San Francisco' : 'San Francisco County'}</Link></li>
+              <li><Link href={faqsHref} className="hover:text-white transition-colors">{isEs ? 'Preguntas Frecuentes' : 'Frequently Asked Questions'}</Link></li>
             </ul>
           </div>
 
@@ -102,16 +131,16 @@ export default function Footer() {
               {t.platformDir}
             </p>
             <ul className="space-y-2 text-xs text-gray-400">
-              <li><Link href="/intake" aria-label="Start case intake" className="text-[#52a632] font-semibold hover:underline">{t.startIntake}</Link></li>
-              <li><Link href="/attorneys" className="hover:text-white transition-colors">{t.attorneyDir}</Link></li>
-              <li><Link href="/how-it-works" className="hover:text-white transition-colors">{language === 'es' ? 'Cómo Funciona' : 'How It Works'}</Link></li>
-              <li><Link href="/for-attorneys" className="hover:text-white transition-colors">{t.forAttorneys}</Link></li>
-              <li><Link href="/about" className="hover:text-white transition-colors">{language === 'es' ? 'Quiénes Somos' : 'About Us'}</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">{language === 'es' ? 'Contacto y Ayuda' : 'Contact & Complaints'}</Link></li>
-              <li><Link href="/privacy-policy" className="hover:text-white transition-colors">{t.privacyPolicy}</Link></li>
-              <li><Link href="/terms-of-use" className="hover:text-white transition-colors">{t.termsOfUse}</Link></li>
-              <li><Link href="/disclaimer" className="hover:text-white transition-colors">{t.legalDisclaimer}</Link></li>
-              <li><Link href="/accessibility" className="hover:text-white transition-colors">{t.accessibility}</Link></li>
+              <li><Link href={intakeHref} aria-label="Start case intake" className="text-[#52a632] font-semibold hover:underline">{t.startIntake}</Link></li>
+              <li><Link href={attorneysHref} className="hover:text-white transition-colors">{t.attorneyDir}</Link></li>
+              <li><Link href={howItWorksHref} className="hover:text-white transition-colors">{isEs ? 'Cómo Funciona' : 'How It Works'}</Link></li>
+              <li><Link href={forAttorneysHref} className="hover:text-white transition-colors">{t.forAttorneys}</Link></li>
+              <li><Link href={aboutHref} className="hover:text-white transition-colors">{isEs ? 'Quiénes Somos' : 'About Us'}</Link></li>
+              <li><Link href={contactHref} className="hover:text-white transition-colors">{isEs ? 'Contacto y Ayuda' : 'Contact & Complaints'}</Link></li>
+              <li><Link href={privacyHref} className="hover:text-white transition-colors">{t.privacyPolicy}</Link></li>
+              <li><Link href={termsHref} className="hover:text-white transition-colors">{t.termsOfUse}</Link></li>
+              <li><Link href={disclaimerHref} className="hover:text-white transition-colors">{t.legalDisclaimer}</Link></li>
+              <li><Link href={accessibilityHref} className="hover:text-white transition-colors">{t.accessibility}</Link></li>
             </ul>
           </div>
 
@@ -151,13 +180,13 @@ export default function Footer() {
             </div>
 
             <div className="flex items-center gap-4 text-gray-400">
-              <Link href="/privacy-policy" aria-label="Legal Privacy Policy notice" className="hover:underline">{language === 'es' ? 'Privacidad' : 'Privacy'}</Link>
+              <Link href={privacyHref} aria-label="Legal Privacy Policy notice" className="hover:underline">{isEs ? 'Privacidad' : 'Privacy'}</Link>
               <span>•</span>
-              <Link href="/terms-of-use" aria-label="Platform Terms of Use" className="hover:underline">{language === 'es' ? 'Términos' : 'Terms'}</Link>
+              <Link href={termsHref} aria-label="Platform Terms of Use" className="hover:underline">{isEs ? 'Términos' : 'Terms'}</Link>
               <span>•</span>
-              <Link href="/disclaimer" aria-label="Statutory Attorney Disclaimer" className="hover:underline">{language === 'es' ? 'Aviso Legal' : 'Disclaimer'}</Link>
+              <Link href={disclaimerHref} aria-label="Statutory Attorney Disclaimer" className="hover:underline">{isEs ? 'Aviso Legal' : 'Disclaimer'}</Link>
               <span>•</span>
-              <Link href="/accessibility" aria-label="Digital Accessibility Statement" className="hover:underline">{language === 'es' ? 'Accesibilidad' : 'Accessibility'}</Link>
+              <Link href={accessibilityHref} aria-label="Digital Accessibility Statement" className="hover:underline">{isEs ? 'Accesibilidad' : 'Accessibility'}</Link>
             </div>
           </div>
         </div>

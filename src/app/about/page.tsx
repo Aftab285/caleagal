@@ -4,15 +4,16 @@ import Link from 'next/link';
 import TopBar from '@/components/TopBar';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { ShieldCheck, Target, Globe, Scale, Users, ArrowRight } from 'lucide-react';
+import { getMultilingualMetadata } from '@/lib/i18nRoutes';
+import { ShieldCheck, Globe, Scale, ArrowRight } from 'lucide-react';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getMultilingualMetadata({
+  locale: 'en',
+  enPath: '/about',
+  esPath: '/es/quienes-somos',
   title: 'About CA Legal Source — California Legal Assistance Platform',
   description: 'Learn about CA Legal Source, our mission to simplify finding qualified legal counsel across California, and our commitment to transparency and bilingual accessibility.',
-  alternates: {
-    canonical: 'https://www.calegalsource.com/about',
-  },
-};
+});
 
 export default function AboutPage() {
   return (
@@ -79,7 +80,7 @@ export default function AboutPage() {
               Start our guided intake today for a free case evaluation.
             </p>
             <Link
-              href="/#hero-intake"
+              href="/intake"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#3d7826] hover:bg-[#32641e] text-white font-semibold text-xs sm:text-sm transition-all"
             >
               <span>Get Legal Help</span>

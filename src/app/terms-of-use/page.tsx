@@ -4,13 +4,15 @@ import TopBar from '@/components/TopBar';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-export const metadata: Metadata = {
+import { getMultilingualMetadata } from '@/lib/i18nRoutes';
+
+export const metadata: Metadata = getMultilingualMetadata({
+  locale: 'en',
+  enPath: '/terms-of-use',
+  esPath: '/es/terminos-de-uso',
   title: 'Terms of Use | CA Legal Source',
   description: 'Terms and conditions governing the use of CA Legal Source legal referral and informational website.',
-  alternates: {
-    canonical: 'https://www.calegalsource.com/terms-of-use',
-  },
-};
+});
 
 export default function TermsOfUsePage() {
   return (

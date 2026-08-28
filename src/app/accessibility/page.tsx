@@ -4,13 +4,15 @@ import TopBar from '@/components/TopBar';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-export const metadata: Metadata = {
+import { getMultilingualMetadata } from '@/lib/i18nRoutes';
+
+export const metadata: Metadata = getMultilingualMetadata({
+  locale: 'en',
+  enPath: '/accessibility',
+  esPath: '/es/accesibilidad',
   title: 'Accessibility Statement (WCAG 2.1 AA) | CA Legal Source',
   description: 'Our commitment to digital accessibility for individuals with disabilities in accordance with WCAG 2.1 AA and ADA Title III guidelines.',
-  alternates: {
-    canonical: 'https://www.calegalsource.com/accessibility',
-  },
-};
+});
 
 export default function AccessibilityPage() {
   return (

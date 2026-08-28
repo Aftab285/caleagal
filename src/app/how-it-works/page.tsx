@@ -4,15 +4,16 @@ import Link from 'next/link';
 import TopBar from '@/components/TopBar';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { ArrowRight, MessageSquare, Users, Scale, Handshake, ShieldCheck, CheckCircle2, Lock } from 'lucide-react';
+import { getMultilingualMetadata } from '@/lib/i18nRoutes';
+import { ArrowRight, MessageSquare, Users, Scale, Handshake, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getMultilingualMetadata({
+  locale: 'en',
+  enPath: '/how-it-works',
+  esPath: '/es/como-funciona',
   title: 'How It Works — Transparent Legal Matching Process | CA Legal Source',
   description: 'Understand the step-by-step process of how CA Legal Source evaluates legal inquiries and connects California residents with pre-screened attorneys.',
-  alternates: {
-    canonical: 'https://www.calegalsource.com/how-it-works',
-  },
-};
+});
 
 export default function HowItWorksPage() {
   const steps = [
@@ -121,7 +122,7 @@ export default function HowItWorksPage() {
             </p>
             <div className="pt-2">
               <Link
-                href="/#hero-intake"
+                href="/intake"
                 className="inline-flex items-center gap-2 px-7 py-3 rounded-lg bg-[#3d7826] hover:bg-[#32641e] text-white font-semibold text-sm transition-all"
               >
                 <span>Start Free Case Review</span>

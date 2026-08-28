@@ -4,13 +4,15 @@ import TopBar from '@/components/TopBar';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-export const metadata: Metadata = {
+import { getMultilingualMetadata } from '@/lib/i18nRoutes';
+
+export const metadata: Metadata = getMultilingualMetadata({
+  locale: 'en',
+  enPath: '/disclaimer',
+  esPath: '/es/aviso-legal',
   title: 'Legal Disclaimer | CA Legal Source',
   description: 'Legal disclaimers, California statutory notices, and attorney advertising disclosures for CA Legal Source.',
-  alternates: {
-    canonical: 'https://www.calegalsource.com/disclaimer',
-  },
-};
+});
 
 export default function DisclaimerPage() {
   return (

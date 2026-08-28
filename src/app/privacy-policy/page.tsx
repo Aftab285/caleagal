@@ -4,13 +4,15 @@ import TopBar from '@/components/TopBar';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-export const metadata: Metadata = {
+import { getMultilingualMetadata } from '@/lib/i18nRoutes';
+
+export const metadata: Metadata = getMultilingualMetadata({
+  locale: 'en',
+  enPath: '/privacy-policy',
+  esPath: '/es/politica-de-privacidad',
   title: 'Privacy Policy & California Privacy Notice (CCPA/CPRA) | CA Legal Source',
   description: 'California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA) privacy notice and data protections for CA Legal Source users.',
-  alternates: {
-    canonical: 'https://www.calegalsource.com/privacy-policy',
-  },
-};
+});
 
 export default function PrivacyPolicyPage() {
   return (

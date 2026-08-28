@@ -39,20 +39,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: 'Practice Area Not Found | CA Legal Source' };
   }
 
-  return {
+  const { practiceAreaSlugMap, getMultilingualMetadata } = await import('@/lib/i18nRoutes');
+  const esSlug = practiceAreaSlugMap[area.slug]?.es || area.slug;
+
+  return getMultilingualMetadata({
+    locale: 'en',
+    enPath: `/practice-areas/${area.slug}`,
+    esPath: `/es/areas-de-practica/${esSlug}`,
     title: area.seoTitle,
     description: area.metaDesc,
-    alternates: {
-      canonical: `https://www.calegalsource.com/practice-areas/${area.slug}`,
-    },
-    openGraph: {
-      title: area.seoTitle,
-      description: area.metaDesc,
-      url: `https://www.calegalsource.com/practice-areas/${area.slug}`,
-      siteName: 'CA Legal Source',
-      type: 'article',
-    },
-  };
+  });
 }
 
 export default async function PracticeAreaDetailPage({ params }: PageProps) {

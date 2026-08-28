@@ -26,20 +26,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: 'Guide Not Found | CA Legal Source' };
   }
 
-  return {
+  const { legalGuideSlugMap, getMultilingualMetadata } = await import('@/lib/i18nRoutes');
+  const esSlug = legalGuideSlugMap[guide.slug]?.es || guide.slug;
+
+  return getMultilingualMetadata({
+    locale: 'en',
+    enPath: `/legal-resources/${guide.slug}`,
+    esPath: `/es/recursos/${esSlug}`,
     title: `${guide.title} | CA Legal Source`,
     description: guide.summary,
-    alternates: {
-      canonical: `https://www.calegalsource.com/legal-resources/${guide.slug}`,
-    },
-    openGraph: {
-      title: guide.title,
-      description: guide.summary,
-      url: `https://www.calegalsource.com/legal-resources/${guide.slug}`,
-      siteName: 'CA Legal Source',
-      type: 'article',
-    },
-  };
+  });
 }
 
 export default async function LegalGuideDetailPage({ params }: PageProps) {

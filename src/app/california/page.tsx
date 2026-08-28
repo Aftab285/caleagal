@@ -5,15 +5,16 @@ import TopBar from '@/components/TopBar';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { californiaCountiesData } from '@/data/counties';
+import { getMultilingualMetadata } from '@/lib/i18nRoutes';
 import { MapPin, ChevronRight, ShieldCheck } from 'lucide-react';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getMultilingualMetadata({
+  locale: 'en',
+  enPath: '/california',
+  esPath: '/es/california',
   title: 'California Counties Legal Directory | All 58 Counties | CA Legal Source',
   description: 'Explore legal help and attorney matching services across all 58 California counties, including Los Angeles, San Diego, Orange County, Santa Clara, and Alameda.',
-  alternates: {
-    canonical: 'https://www.calegalsource.com/california',
-  },
-};
+});
 
 export default function CaliforniaHubPage() {
   const regions = [

@@ -7,13 +7,15 @@ import Footer from '@/components/Footer';
 import { sampleAttorneysData } from '@/data/attorneys';
 import { ShieldCheck, MapPin, Languages, Briefcase, GraduationCap, ArrowRight, UserCheck } from 'lucide-react';
 
-export const metadata: Metadata = {
+import { getMultilingualMetadata } from '@/lib/i18nRoutes';
+
+export const metadata: Metadata = getMultilingualMetadata({
+  locale: 'en',
+  enPath: '/attorneys',
+  esPath: '/es/abogados',
   title: 'California Attorney Directory | Find Pre-Screened California Lawyers | CA Legal Source',
   description: 'Search our directory of verified California attorneys by practice area, county jurisdiction, and language preference.',
-  alternates: {
-    canonical: 'https://www.calegalsource.com/attorneys',
-  },
-};
+});
 
 export default function AttorneyDirectoryPage() {
   return (

@@ -13,13 +13,30 @@ export default function Header() {
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const { language } = useLanguage();
   const t = translations[language].header;
+  const isEs = language === 'es';
+
+  // Dynamic routes based on locale
+  const homeHref = isEs ? '/es' : '/';
+  const practiceAreasHref = isEs ? '/es/areas-de-practica' : '/practice-areas';
+  const injuryHref = isEs ? '/es/areas-de-practica/lesiones-personales' : '/practice-areas/personal-injury';
+  const employmentHref = isEs ? '/es/areas-de-practica/derecho-laboral' : '/practice-areas/employment';
+  const carAccidentHref = isEs ? '/es/recursos/guia-accidentes-de-auto-en-california' : '/legal-resources/california-car-accident-step-by-step-guide';
+  const familyHref = isEs ? '/es/areas-de-practica/derecho-familiar' : '/practice-areas/family-law';
+  const tenantHref = isEs ? '/es/areas-de-practica/arrendador-inquilino' : '/practice-areas/landlord-tenant';
+  const howItWorksHref = isEs ? '/es/como-funciona' : '/how-it-works';
+  const attorneysHref = isEs ? '/es/abogados' : '/attorneys';
+  const resourcesHref = isEs ? '/es/recursos' : '/legal-resources';
+  const faqsHref = isEs ? '/es#faqs' : '/#faqs';
+  const californiaHref = isEs ? '/es/california' : '/california';
+  const aboutHref = isEs ? '/es/quienes-somos' : '/about';
+  const contactHref = isEs ? '/es/contacto' : '/contact';
 
   return (
     <header className="sticky top-0 z-50 bg-white/98 backdrop-blur-md border-b border-gray-200 shadow-2xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-1.5 sm:py-2 flex items-center justify-between">
         
         {/* Brand Logo */}
-        <Link href="/" aria-label="CA Legal Source Homepage" className="flex items-center group py-0.5">
+        <Link href={homeHref} aria-label="CA Legal Source Homepage" className="flex items-center group py-0.5">
           <div className="relative flex items-center">
             <Image
               src="/logo.png"
@@ -40,7 +57,7 @@ export default function Header() {
             onMouseEnter={() => setPracticeOpen(true)}
             onMouseLeave={() => setPracticeOpen(false)}
           >
-            <Link href="/practice-areas" className="flex items-center gap-1 font-medium hover:text-[#3d7826] transition-colors cursor-pointer">
+            <Link href={practiceAreasHref} className="flex items-center gap-1 font-medium hover:text-[#3d7826] transition-colors cursor-pointer">
               <span>{t.practiceAreas}</span>
               <ChevronDown className="w-3.5 h-3.5 text-gray-500 group-hover:text-[#3d7826] transition-transform group-hover:rotate-180 duration-200" />
             </Link>
@@ -50,34 +67,34 @@ export default function Header() {
                 <div className="px-4 py-1.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider">
                   {t.popularAreas}
                 </div>
-                <Link href="/practice-areas/personal-injury" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
-                  {language === 'es' ? 'Lesiones Personales' : 'Personal Injury'}
+                <Link href={injuryHref} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
+                  {isEs ? 'Lesiones Personales' : 'Personal Injury'}
                 </Link>
-                <Link href="/practice-areas/employment" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
-                  {language === 'es' ? 'Derecho Laboral' : 'Employment Law'}
+                <Link href={employmentHref} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
+                  {isEs ? 'Derecho Laboral' : 'Employment Law'}
                 </Link>
-                <Link href="/legal-resources/california-car-accident-step-by-step-guide" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
-                  {language === 'es' ? 'Guía de Accidentes de Auto' : 'Car Accident Guide'}
+                <Link href={carAccidentHref} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
+                  {isEs ? 'Guía de Accidentes de Auto' : 'Car Accident Guide'}
                 </Link>
-                <Link href="/practice-areas/family-law" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
-                  {language === 'es' ? 'Derecho Familiar' : 'Family Law'}
+                <Link href={familyHref} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
+                  {isEs ? 'Derecho Familiar' : 'Family Law'}
                 </Link>
-                <Link href="/practice-areas/landlord-tenant" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
-                  {language === 'es' ? 'Inquilinos y Propietarios' : 'Landlord-Tenant'}
+                <Link href={tenantHref} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
+                  {isEs ? 'Inquilinos y Propietarios' : 'Landlord-Tenant'}
                 </Link>
                 <div className="border-t border-gray-100 my-1"></div>
-                <Link href="/practice-areas" className="block px-4 py-2 text-xs font-bold text-[#3d7826] hover:underline">
+                <Link href={practiceAreasHref} className="block px-4 py-2 text-xs font-bold text-[#3d7826] hover:underline">
                   {t.viewAllPracticeAreas}
                 </Link>
               </div>
             )}
           </div>
 
-          <Link href="/how-it-works" className="font-medium hover:text-[#3d7826] transition-colors">
+          <Link href={howItWorksHref} className="font-medium hover:text-[#3d7826] transition-colors">
             {t.howItWorks}
           </Link>
 
-          <Link href="/attorneys" className="font-medium hover:text-[#3d7826] transition-colors">
+          <Link href={attorneysHref} className="font-medium hover:text-[#3d7826] transition-colors">
             {t.findALawyer}
           </Link>
 
@@ -87,31 +104,31 @@ export default function Header() {
             onMouseEnter={() => setResourcesOpen(true)}
             onMouseLeave={() => setResourcesOpen(false)}
           >
-            <Link href="/legal-resources" className="flex items-center gap-1 font-medium hover:text-[#3d7826] transition-colors cursor-pointer">
+            <Link href={resourcesHref} className="flex items-center gap-1 font-medium hover:text-[#3d7826] transition-colors cursor-pointer">
               <span>{t.resources}</span>
               <ChevronDown className="w-3.5 h-3.5 text-gray-500 group-hover:text-[#3d7826] transition-transform group-hover:rotate-180 duration-200" />
             </Link>
 
             {resourcesOpen && (
               <div className="absolute top-full left-0 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-3 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
-                <Link href="/legal-resources" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
+                <Link href={resourcesHref} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
                   {t.legalGuides}
                 </Link>
-                <Link href="/#faqs" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
+                <Link href={faqsHref} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
                   {t.faqs}
                 </Link>
-                <Link href="/california" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
+                <Link href={californiaHref} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#3d7826]">
                   {t.countyDirectory}
                 </Link>
               </div>
             )}
           </div>
 
-          <Link href="/about" className="font-medium hover:text-[#3d7826] transition-colors">
+          <Link href={aboutHref} className="font-medium hover:text-[#3d7826] transition-colors">
             {t.aboutUs}
           </Link>
 
-          <Link href="/contact" className="font-medium hover:text-[#3d7826] transition-colors">
+          <Link href={contactHref} className="font-medium hover:text-[#3d7826] transition-colors">
             {t.contact}
           </Link>
         </nav>
@@ -130,42 +147,42 @@ export default function Header() {
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white border-b border-gray-200 px-6 py-4 shadow-lg space-y-3">
           <Link
-            href="/practice-areas"
+            href={practiceAreasHref}
             onClick={() => setMobileMenuOpen(false)}
             className="block text-sm font-medium text-gray-800 hover:text-[#3d7826]"
           >
             {t.practiceAreas}
           </Link>
           <Link
-            href="/how-it-works"
+            href={howItWorksHref}
             onClick={() => setMobileMenuOpen(false)}
             className="block text-sm font-medium text-gray-800 hover:text-[#3d7826]"
           >
             {t.howItWorks}
           </Link>
           <Link
-            href="/attorneys"
+            href={attorneysHref}
             onClick={() => setMobileMenuOpen(false)}
             className="block text-sm font-medium text-gray-800 hover:text-[#3d7826]"
           >
             {t.findALawyer}
           </Link>
           <Link
-            href="/legal-resources"
+            href={resourcesHref}
             onClick={() => setMobileMenuOpen(false)}
             className="block text-sm font-medium text-gray-800 hover:text-[#3d7826]"
           >
             {t.resources}
           </Link>
           <Link
-            href="/about"
+            href={aboutHref}
             onClick={() => setMobileMenuOpen(false)}
             className="block text-sm font-medium text-gray-800 hover:text-[#3d7826]"
           >
             {t.aboutUs}
           </Link>
           <Link
-            href="/contact"
+            href={contactHref}
             onClick={() => setMobileMenuOpen(false)}
             className="block text-sm font-medium text-gray-800 hover:text-[#3d7826]"
           >

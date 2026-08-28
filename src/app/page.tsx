@@ -1,4 +1,5 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import TopBar from '@/components/TopBar';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
@@ -11,24 +12,33 @@ import FAQSection from '@/components/FAQSection';
 import FinalCTA from '@/components/FinalCTA';
 import Footer from '@/components/Footer';
 import StickyMobileCTA from '@/components/StickyMobileCTA';
+import { getMultilingualMetadata } from '@/lib/i18nRoutes';
+
+export const metadata: Metadata = getMultilingualMetadata({
+  locale: 'en',
+  enPath: '/',
+  esPath: '/es',
+  title: 'CA Legal Source — Get Connected to a California Lawyer Who Can Help',
+  description: 'Tell us about your situation and we will help connect you with a qualified California attorney. Free case evaluation for qualifying matters across all 58 counties.',
+});
 
 export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      {/* 1. Utility Top Bar with Language Selector & Toll-Free Phone */}
+      {/* 1. Utility Top Bar with Language Selector */}
       <TopBar />
 
       {/* 2. Navigation Header with Official Brand Logo & Dropdowns */}
       <Header />
 
       <main className="flex-grow">
-        {/* 3. Hero Section with California Bay Bridge Silhouette & Interactive Multi-Step Intake Form */}
+        {/* 3. Hero Section with Interactive Intake Form */}
         <HeroSection />
 
         {/* 4. Trust / Value Understanding Section */}
         <TrustValueSection />
 
-        {/* 5. How It Works (4 Clean Steps in 1 Line with Connecting Arrows) */}
+        {/* 5. How It Works (4 Clean Steps with Connecting Arrows) */}
         <HowItWorks />
 
         {/* 6. Practice Areas Grid (7 Featured Practice Area Cards + View All CTA) */}

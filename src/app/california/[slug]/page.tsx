@@ -26,13 +26,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: 'County Not Found | CA Legal Source' };
   }
 
-  return {
+  const { getCountySlugPair, getMultilingualMetadata } = await import('@/lib/i18nRoutes');
+  const slugPair = getCountySlugPair(county.slug);
+
+  return getMultilingualMetadata({
+    locale: 'en',
+    enPath: `/california/${slugPair.en}`,
+    esPath: `/es/california/${slugPair.es}`,
     title: `${county.name} Legal Help & Attorney Referral | CA Legal Source`,
     description: `Find qualified California attorneys in ${county.name} covering ${county.majorCities.slice(0, 4).join(', ')}. Free case review and intake for qualifying matters.`,
-    alternates: {
-      canonical: `https://www.calegalsource.com/california/${county.slug}`,
-    },
-  };
+  });
 }
 
 export default async function CountyDetailPage({ params }: PageProps) {

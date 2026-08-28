@@ -5,15 +5,16 @@ import TopBar from '@/components/TopBar';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { all17PracticeAreasData } from '@/data/practiceAreas';
-import { ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { getMultilingualMetadata } from '@/lib/i18nRoutes';
+import { ArrowRight, ShieldCheck } from 'lucide-react';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getMultilingualMetadata({
+  locale: 'en',
+  enPath: '/practice-areas',
+  esPath: '/es/areas-de-practica',
   title: 'California Practice Areas | Find Legal Help Across 17 Legal Categories | CA Legal Source',
   description: 'Explore all 17 California legal practice areas supported by CA Legal Source, including employment law, personal injury, tenant rights, ADA, and family law.',
-  alternates: {
-    canonical: 'https://www.calegalsource.com/practice-areas',
-  },
-};
+});
 
 export default function PracticeAreasHub() {
   return (
@@ -80,7 +81,7 @@ export default function PracticeAreasHub() {
                     </Link>
 
                     <Link
-                      href="/#hero-intake"
+                      href={`/intake?area=${encodeURIComponent(area.slug)}`}
                       className="text-xs font-semibold text-gray-500 hover:text-[#0f233a]"
                     >
                       Get Matched →

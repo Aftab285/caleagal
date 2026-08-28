@@ -4,15 +4,16 @@ import TopBar from '@/components/TopBar';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
-import { ShieldCheck, CheckCircle2, Lock } from 'lucide-react';
+import { getMultilingualMetadata } from '@/lib/i18nRoutes';
+import { Lock } from 'lucide-react';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getMultilingualMetadata({
+  locale: 'en',
+  enPath: '/intake',
+  esPath: '/es/evaluacion-gratuita',
   title: 'Request California Legal Help | Free Case Intake & Attorney Matching',
   description: 'Submit your confidential California legal inquiry to be evaluated for connection with a qualified attorney handling your specific matter in your county.',
-  alternates: {
-    canonical: 'https://www.calegalsource.com/intake',
-  },
-};
+});
 
 export default function IntakePage() {
   return (

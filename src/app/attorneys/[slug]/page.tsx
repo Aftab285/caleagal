@@ -26,13 +26,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: 'Attorney Profile Not Found | CA Legal Source' };
   }
 
-  return {
+  const { getMultilingualMetadata } = await import('@/lib/i18nRoutes');
+
+  return getMultilingualMetadata({
+    locale: 'en',
+    enPath: `/attorneys/${attorney.slug}`,
+    esPath: `/es/abogados/${attorney.slug}`,
     title: `${attorney.name} | California Attorney Profile | CA Legal Source`,
     description: `${attorney.name} - ${attorney.title} at ${attorney.firm}. Practice areas: ${attorney.practiceAreas.join(', ')}. Serving ${attorney.countiesServed.join(', ')}.`,
-    alternates: {
-      canonical: `https://www.calegalsource.com/attorneys/${attorney.slug}`,
-    },
-  };
+  });
 }
 
 export default async function AttorneyProfileDetailPage({ params }: PageProps) {
