@@ -6,6 +6,9 @@ import TopBar from '@/components/TopBar';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { californiaCountiesData } from '@/data/counties';
+import { all17PracticeAreasData } from '@/data/practiceAreas';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbSchema, graph } from '@/lib/schema';
 import { MapPin, ArrowRight, ShieldCheck, CheckCircle2, Phone, Building } from 'lucide-react';
 
 interface PageProps {
@@ -33,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     locale: 'en',
     enPath: `/california/${slugPair.en}`,
     esPath: `/es/california/${slugPair.es}`,
-    title: `${county.name} Legal Help & Attorney Referral | CA Legal Source`,
+    title: `${county.name} Legal Help & Attorneys | CA Legal Source`,
     description: `Find qualified California attorneys in ${county.name} covering ${county.majorCities.slice(0, 4).join(', ')}. Free case review and intake for qualifying matters.`,
   });
 }
@@ -46,8 +49,34 @@ export default async function CountyDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  // Other counties in the same region, for internal links between related pages.
+  const nearbyCounties = californiaCountiesData.filter(
+    (c) => c.region === county.region && c.slug !== county.slug,
+  );
+  const practiceLinks = all17PracticeAreasData.filter((a) => a.slug !== 'other');
+
+  const schema = graph(
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'California Counties', path: '/california' },
+      { name: county.name, path: `/california/${county.slug}` },
+    ]),
+    {
+      '@type': 'WebPage',
+      name: `${county.name} Legal Help & Attorneys`,
+      url: `https://www.calegalsource.com/california/${county.slug}`,
+      about: {
+        '@type': 'AdministrativeArea',
+        name: `${county.name}, California`,
+        containedInPlace: { '@type': 'State', name: 'California' },
+      },
+      provider: { '@id': 'https://www.calegalsource.com/#organization' },
+    },
+  );
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
+      <JsonLd data={schema} />
       <TopBar />
       <Header />
 
@@ -63,7 +92,7 @@ export default async function CountyDetailPage({ params }: PageProps) {
             </div>
 
             <h1 className="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-              {county.name} Legal Help & Attorney Connection
+              {county.name} Legal Help & Attorneys
             </h1>
 
             <p className="text-gray-300 text-base sm:text-lg max-w-3xl leading-relaxed">
@@ -122,6 +151,46 @@ export default async function CountyDetailPage({ params }: PageProps) {
                   Civil lawsuits, unlawful detainers, small claims, family law, and criminal matters in {county.name} are adjudicated through the California Superior Court system. County Seat: <strong>{county.seat}</strong>.
                 </p>
               </section>
+
+              <section className="space-y-4">
+                <h2 className="font-playfair text-2xl font-bold text-[#0f233a]">
+                  Common Legal Issues in {county.name}
+                </h2>
+                <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+                  Residents of {county.majorCities.slice(0, 3).join(', ')} and the rest of {county.name} contact us about the matters below. Choose a topic to learn about your rights under California law, then request a free case review.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {practiceLinks.map((area) => (
+                    <Link
+                      key={area.slug}
+                      href={`/practice-areas/${area.slug}`}
+                      className="flex items-center gap-2 p-3 rounded-lg border border-gray-200 hover:border-[#3d7826] text-sm text-[#0f233a] transition-colors"
+                    >
+                      <ArrowRight className="w-3.5 h-3.5 text-[#3d7826] shrink-0" />
+                      <span>{area.name} help in {county.name}</span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+
+              {nearbyCounties.length > 0 && (
+                <section className="space-y-3">
+                  <h2 className="font-playfair text-xl font-bold text-[#0f233a]">
+                    Other {county.region} Counties
+                  </h2>
+                  <div className="flex flex-wrap gap-2">
+                    {nearbyCounties.map((c) => (
+                      <Link
+                        key={c.slug}
+                        href={`/california/${c.slug}`}
+                        className="px-3 py-1.5 rounded-full bg-[#f8fafc] border border-gray-200 hover:border-[#3d7826] text-xs sm:text-sm text-gray-700"
+                      >
+                        {c.name}
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              )}
             </div>
 
             <div className="lg:col-span-4">

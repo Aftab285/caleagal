@@ -6,6 +6,8 @@ import TopBar from '@/components/TopBar';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { all17PracticeAreasData } from '@/data/practiceAreas';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbSchema, faqSchema, graph } from '@/lib/schema';
 import { 
   Shield, 
   ArrowRight, 
@@ -59,8 +61,18 @@ export default async function PracticeAreaDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  const schema = graph(
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Practice Areas', path: '/practice-areas' },
+      { name: area.name, path: `/practice-areas/${area.slug}` },
+    ]),
+    ...(area.faqs.length ? [faqSchema(area.faqs)] : []),
+  );
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
+      <JsonLd data={schema} />
       <TopBar />
       <Header />
 

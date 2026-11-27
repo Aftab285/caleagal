@@ -1,4 +1,5 @@
 import { PracticeAreaDetail } from '@/lib/types';
+import { practiceAreaEnhancements } from '@/data/practiceAreaEnhancements';
 
 export const all17PracticeAreasData: PracticeAreaDetail[] = [
   // 1. ADA / Disability
@@ -1400,5 +1401,19 @@ export const all17PracticeAreasData: PracticeAreaDetail[] = [
     ]
   }
 ];
+
+// Apply SEO enhancements (titles, descriptions, extra FAQs, link fixes).
+for (const area of all17PracticeAreasData) {
+  const enh = practiceAreaEnhancements[area.slug];
+  if (!enh) continue;
+  if (enh.seoTitle) area.seoTitle = enh.seoTitle;
+  if (enh.seoTitleEs) area.seoTitleEs = enh.seoTitleEs;
+  if (enh.metaDesc) area.metaDesc = enh.metaDesc;
+  if (enh.metaDescEs) area.metaDescEs = enh.metaDescEs;
+  if (enh.extraCommonIssues) area.commonIssues = [...area.commonIssues, ...enh.extraCommonIssues];
+  if (enh.extraCommonIssuesEs) area.commonIssuesEs = [...area.commonIssuesEs, ...enh.extraCommonIssuesEs];
+  if (enh.extraFaqs) area.faqs = [...area.faqs, ...enh.extraFaqs];
+  if (enh.relatedPracticeAreas) area.relatedPracticeAreas = enh.relatedPracticeAreas;
+}
 
 export const all17PracticeAreas = all17PracticeAreasData.map(a => a.name);
