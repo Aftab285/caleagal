@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import { LanguageProvider } from '@/context/LanguageContext';
+import JsonLd from '@/components/JsonLd';
+import { organizationSchema, graph } from '@/lib/schema';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -19,9 +21,6 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.calegalsource.com'),
   title: 'CA Legal Source | Connect with a California Lawyer',
   description: 'Connect with qualified California lawyers across all 58 counties. Free case evaluations for injury, employment, tenant rights, and more.',
-  alternates: {
-    canonical: 'https://www.calegalsource.com',
-  },
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '48x48', type: 'image/x-icon' },
@@ -61,6 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable} scroll-smooth`}>
       <body className="min-h-screen bg-white text-slate-800 antialiased font-sans flex flex-col selection:bg-[#3d7826]/20 selection:text-[#0f233a]">
+        <JsonLd data={graph(organizationSchema)} />
         <LanguageProvider>
           {children}
         </LanguageProvider>

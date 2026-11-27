@@ -7,6 +7,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import StickyMobileCTA from '@/components/StickyMobileCTA';
 import { all17PracticeAreasData } from '@/data/practiceAreas';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbSchema, faqSchema, graph } from '@/lib/schema';
 import { practiceAreaSlugMap, getMultilingualMetadata } from '@/lib/i18nRoutes';
 import { 
   ShieldCheck, 
@@ -86,8 +88,20 @@ export default async function SpanishPracticeAreaPage({ params }: Props) {
   const whenToConsult = area.whenToConsultEs || area.whenToConsult;
   const faqs = area.faqs || [];
 
+  const schema = graph(
+    breadcrumbSchema([
+      { name: 'Inicio', path: '/es' },
+      { name: 'Áreas de Práctica', path: '/es/areas-de-practica' },
+      { name: title, path: `/es/areas-de-practica/${slug}` },
+    ]),
+    ...(faqs.length
+      ? [faqSchema(faqs.map((f) => ({ question: f.questionEs || f.question, answer: f.answerEs || f.answer })))]
+      : []),
+  );
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
+      <JsonLd data={schema} />
       <TopBar />
       <Header />
 
